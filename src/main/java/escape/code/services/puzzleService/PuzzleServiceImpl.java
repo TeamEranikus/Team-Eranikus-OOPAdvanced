@@ -1,7 +1,7 @@
 package escape.code.services.puzzleService;
 
-import escape.code.daos.puzzledaos.PuzzleDao;
-import escape.code.daos.puzzledaos.PuzzleDaoImpl;
+import escape.code.daos.puzzleDAO.PuzzleDao;
+import escape.code.daos.puzzleDAO.PuzzleDaoImpl;
 import escape.code.enums.Item;
 import escape.code.models.Puzzle;
 

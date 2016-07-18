@@ -1,16 +1,23 @@
-package escape.code.services.userservices;
+package escape.code.services.userService;
 
-import escape.code.daos.userdaos.UserDao;
-import escape.code.daos.userdaos.UserDaoImpl;
+import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDao;
+import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDaoImpl;
+import escape.code.daos.userDAO.UserDao;
+import escape.code.daos.userDAO.UserDaoImpl;
 import escape.code.enums.Item;
+import escape.code.models.PuzzleRectangle;
 import escape.code.models.User;
+import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
+import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
 
 public class UserServiceImpl implements UserService {
 
     private static UserDao userDao;
+    private static PuzzleRectangleService puzzleRectangleService;
 
     static {
         userDao = new UserDaoImpl();
+        puzzleRectangleService = new PuzzleRectangleServiceImpl();
     }
 
     @Override
@@ -20,6 +27,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         user.setItem(Item.NONE);
         user.setLevel(0);
+        PuzzleRectangle puzzleRectangle = puzzleRectangleService.getFirst();
+        user.setPuzzleRectangle(puzzleRectangle);
         this.userDao.create(user);
 
     }

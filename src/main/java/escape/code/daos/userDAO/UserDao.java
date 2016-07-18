@@ -1,4 +1,4 @@
-package escape.code.daos.userdaos;
+package escape.code.daos.userDAO;
 
 import escape.code.models.User;
 

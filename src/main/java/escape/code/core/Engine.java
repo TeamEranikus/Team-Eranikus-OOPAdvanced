@@ -1,9 +1,14 @@
 package escape.code.core;
 
+import escape.code.controllers.PuzzlesController;
+import escape.code.models.PuzzleRectangle;
 import escape.code.models.Sprite;
 import escape.code.models.User;
+import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
+import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
 import escape.code.utils.Constants;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -13,17 +18,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 public class Engine {
 
-    private PuzzleManager puzzleManager;
+    // private PuzzleManager puzzleManager;
     private HashMap<KeyCode, Boolean> keys;
-    private LinkedList<Rectangle> rectangles;
+    private ObservableMap<String, Object> objectsInCurrentScene;
     private ArrayList<Rectangle> rectCollision;
     private Rectangle currentPuzzle;
     private boolean hasCol = false;
@@ -33,6 +35,8 @@ public class Engine {
     private Stage currentLoadedStage;
     private FXMLLoader loader;
     private User user;
+    private PuzzleRectangleService puzzleRectangleService;
+    FXMLLoader puzzleLoader;
 
 
     public Engine(FXMLLoader loader, User user) {
@@ -42,28 +46,27 @@ public class Engine {
     }
 
     private void initialize() {
-        this.puzzleManager = new PuzzleManager();
+        // this.puzzleManager = new PuzzleManager();
+        Scene scene = ((Pane) this.loader.getRoot()).getScene();
+        this.currentLoadedStage = (Stage) (scene.getWindow());
         this.keys = new HashMap<>();
-        this.rectangles = new LinkedList<>();
+        this.objectsInCurrentScene = loader.getNamespace();
         this.rectCollision = new ArrayList<>();
         this.stageManager = new StageManager();
         ImageView playerImage = (ImageView) this.loader.getNamespace().get("imagePlayer");
         ResizableCanvas canvas = (ResizableCanvas) this.loader.getNamespace().get("mainCanvas");
         this.sprite = new Sprite(playerImage, canvas);
-        this.loadRectanglesPuzzles();
+        this.currentPuzzle = getCurrentPuzzleRectangle();
         this.loadRectanglesCollision();
-
-        Scene scene = ((Pane) this.loader.getRoot()).getScene();
-        this.currentLoadedStage = (Stage) (scene.getWindow());
+        this.puzzleRectangleService = new PuzzleRectangleServiceImpl();
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-        puzzleManager.load(user.getLevel());
+        //puzzleManager.load(user.getLevel());
     }
 
     public void play() throws IllegalStateException {
         updateSpriteCoordinates();
         hasCol = checkForCol(currentPuzzle);
-
         if (hasCol) {
             setCurrentPuzzle();
 
@@ -71,39 +74,34 @@ public class Engine {
             sprite.getImageView().setLayoutY(300.0);
 
         }
-        if (Constants.IS_ANSWER_CORRECT) {
-            currentPuzzle.setVisible(false);
+        if (user.getPuzzleRectangle().getPuzzle().isAnswerGiven()) {
+            //currentPuzzle.setVisible(false);
             currentPuzzle.setDisable(true);
-            rectangles.removeFirst();
-            if (this.rectangles.size() == 1){
-
-                    this.setItemCount("keyOne");
-
-            }
+            long puzzleRectangleId = user.getPuzzleRectangle().getId();
+            PuzzleRectangle puzzle = this.puzzleRectangleService.getOneById(puzzleRectangleId + 1); //TODO
+            this.user.setPuzzleRectangle(puzzle);
             currentPuzzle = getCurrentPuzzleRectangle();
-            Constants.IS_ANSWER_CORRECT = false;
             hasToSetPuzzle = true;
         }
     }
 
-
     private void setCurrentPuzzle() throws IllegalStateException {
         if (!currentPuzzle.getId().contains("door")) {
-            try {
-                if (hasToSetPuzzle) {
-                    hasToSetPuzzle = false;
-                    puzzleManager.setPuzzle();
-                    //TODO user.setItem(Item item)
-                    //TODO pop-up
-                    //this.setItemCount("bookOne");
-                }
-                stageManager.loadNewStage(Constants.PUZZLE_FXML_PATH);
-                keys.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            if (hasToSetPuzzle) {
+                hasToSetPuzzle = false;
+
+                PuzzlesController.setPuzzle(user.getPuzzleRectangle().getPuzzle());
+                //TODO user.setItem(Item item)
+                //TODO pop-up
+                //this.setItemCount("bookOne");
             }
+            puzzleLoader = stageManager.loadSceneToPrimaryStage(new Stage(), Constants.PUZZLE_FXML_PATH);
+            keys.clear();
         } else {
             currentLoadedStage.close();
+            PuzzleRectangle puzzle = user.getPuzzleRectangle();
+            user.setPuzzleRectangle(this.puzzleRectangleService.getOneById(puzzle.getId() + 1));
             throw new IllegalStateException("STOP");
         }
     }
@@ -149,42 +147,23 @@ public class Engine {
         return keys.getOrDefault(key, false);
     }
 
-    private void loadRectanglesPuzzles() {
-        ObservableList<Node> listOfAllElements = ((Pane) loader.getRoot()).getChildren();
-        for (Node element : listOfAllElements) {
-            if (element != null && element.getId().endsWith("Puzzle")) {
-                Rectangle current = (Rectangle) element;
-                current.setDisable(true);
-                current.setVisible(false);
-                rectangles.add(current);
-            }
-        }
-
-        rectangles = rectangles.stream()
-                .sorted((a, b) -> a.getId().compareTo(b.getId()))
-                .collect(Collectors.toCollection(LinkedList<Rectangle>::new));
-        currentPuzzle = getCurrentPuzzleRectangle();
-    }
 
     private void loadRectanglesCollision() {
-        ObservableList<Node> listOfAllElements = ((Pane) loader.getRoot()).getChildren();
-        for (Node element : listOfAllElements) {
-            if (element != null && element.getId().endsWith("Col")) {
-                Rectangle current = (Rectangle) element;
+        for (String id : this.objectsInCurrentScene.keySet()) {
+            if (id.endsWith("Col")){
+                Rectangle current = (Rectangle)this.objectsInCurrentScene.get(id);
                 rectCollision.add(current);
             }
+
         }
 
     }
 
     private Rectangle getCurrentPuzzleRectangle() {
-        if (rectangles.size() > 0) {
-            Rectangle current = rectangles.peekFirst();
-         //   current.setVisible(true);
-            current.setDisable(false);
-            return current;
-        }
-        return new Rectangle();
+        PuzzleRectangle puzzleRectangle = user.getPuzzleRectangle();
+        Rectangle current = (Rectangle) this.objectsInCurrentScene.get(puzzleRectangle.getName());
+        current.setVisible(false);
+        return current;
     }
 
     private boolean checkForCol(Rectangle current) {
@@ -194,10 +173,10 @@ public class Engine {
         return current.getBoundsInParent().intersects(sprite.getImageView().getBoundsInParent());
     }
 
-    private void setItemCount(String itemName){
+    private void setItemCount(String itemName) {
         ObservableList<Node> listOfAllElements = ((Pane) loader.getRoot()).getChildren();
         for (Node field : listOfAllElements) {
-            if (field.getId().equals(itemName)){
+            if (field.getId().equals(itemName)) {
 
                 field.setVisible(true);
             }

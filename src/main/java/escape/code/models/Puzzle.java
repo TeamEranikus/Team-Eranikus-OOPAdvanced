@@ -2,15 +2,12 @@ package escape.code.models;
 
 import escape.code.enums.Item;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "puzzle")
-public class Puzzle implements Serializable{
+public class Puzzle implements Serializable {
     private Long id;
     private String question;
     private String correctAnswer;
@@ -19,8 +16,10 @@ public class Puzzle implements Serializable{
     private String nextClue;
     private int level;
     private Item item;
+    private PuzzleRectangle rectangle;
+    private boolean isAnswerGiven;
 
-    public Puzzle(){
+    public Puzzle() {
 
     }
 
@@ -74,8 +73,8 @@ public class Puzzle implements Serializable{
         this.correctAnswer = correctAnswer;
     }
 
-    public boolean checkCorrectAnswer(String answer){
-        if(answer.equals(getCorrectAnswer())){
+    public boolean checkCorrectAnswer(String answer) {
+        if (answer.equals(getCorrectAnswer())) {
             return true;
         }
         return false;
@@ -89,12 +88,30 @@ public class Puzzle implements Serializable{
         this.level = level;
     }
 
-    public Item getItem(){
+    public Item getItem() {
         return this.item;
     }
 
-    public void setItem(Item item){
+    public void setItem(Item item) {
         this.item = item;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "puzzle")
+    public PuzzleRectangle getRectangle() {
+        return this.rectangle;
+    }
+
+    public void setRectangle(PuzzleRectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    @Transient
+    public boolean isAnswerGiven() {
+        return isAnswerGiven;
+    }
+
+    public void setAnswerGiven(boolean answerGiven) {
+        isAnswerGiven = answerGiven;
     }
 }
 

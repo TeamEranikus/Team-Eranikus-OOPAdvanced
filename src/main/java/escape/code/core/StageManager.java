@@ -47,10 +47,11 @@ public class StageManager {
         return fxmlLoader;
     }
 
-    public Stage loadNewStage(String fxmlPath) throws IOException {
+    public FXMLLoader loadNewStage(String fxmlPath) throws IOException {
         Stage newStage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         newStage.setTitle(Constants.TITLE);
-        root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        root = (AnchorPane) fxmlLoader.getRoot();
         Region contentRootRegion = (Region) FXMLLoader.load(getClass().getResource(fxmlPath));
         double origW = Constants.FULL_HD_WIDTH;
         double origH = Constants.FULL_HD_HIGH;
@@ -76,7 +77,7 @@ public class StageManager {
         newStage.setScene(scene);
         newStage.show();
         newStage.centerOnScreen();
-        return newStage;
+        return fxmlLoader;
     }
 }
 

@@ -1,6 +1,7 @@
 package escape.code.configurations;
 
 import escape.code.models.Puzzle;
+import escape.code.models.PuzzleRectangle;
 import escape.code.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,13 +47,14 @@ public class HibernateUtils implements Serializable {
         Configuration cfg = new Configuration();
         cfg.addAnnotatedClass(User.class);
         cfg.addAnnotatedClass(Puzzle.class);
+        cfg.addAnnotatedClass(PuzzleRectangle.class);
         cfg.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3305/escape_code?createDatabaseIfNotExist=true");
         cfg.setProperty("hibernate.connection.username", "root");
         cfg.setProperty("hibernate.connection.password", "1234");
         cfg.setProperty("hibernate.show_sql", "true");
         cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-        cfg.setProperty("hibernate.hbm2ddl.auto", "update");
+        cfg.setProperty("hibernate.hbm2ddl.auto", "create");
         cfg.setProperty("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
         cfg.setProperty("hibernate.current_session_context_class", "thread");
         return cfg;

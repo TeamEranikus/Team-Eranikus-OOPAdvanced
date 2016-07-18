@@ -2,8 +2,8 @@ package escape.code.core;
 
 import escape.code.enums.Level;
 import escape.code.models.User;
-import escape.code.services.userservices.UserService;
-import escape.code.services.userservices.UserServiceImpl;
+import escape.code.services.userService.UserService;
+import escape.code.services.userService.UserServiceImpl;
 import escape.code.utils.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;

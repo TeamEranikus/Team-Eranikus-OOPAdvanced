@@ -1,4 +1,4 @@
-package escape.code.services.userservices;
+package escape.code.services.userService;
 
 import escape.code.models.User;
 

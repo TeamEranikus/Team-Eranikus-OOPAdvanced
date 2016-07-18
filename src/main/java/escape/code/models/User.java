@@ -2,10 +2,7 @@ package escape.code.models;
 
 import escape.code.enums.Item;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -16,6 +13,7 @@ public class User implements Serializable{
     private Long id;
     private Item item;
     private int level;
+    private PuzzleRectangle puzzleRectangle;
 
     @Id
     @GeneratedValue()
@@ -60,5 +58,15 @@ public class User implements Serializable{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "puzzle_rectangle", nullable = false)
+    public PuzzleRectangle getPuzzleRectangle() {
+        return this.puzzleRectangle;
+    }
+
+    public void setPuzzleRectangle(PuzzleRectangle puzzleRectangle) {
+        this.puzzleRectangle = puzzleRectangle;
     }
 }

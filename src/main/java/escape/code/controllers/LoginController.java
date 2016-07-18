@@ -2,8 +2,8 @@ package escape.code.controllers;
 
 import escape.code.core.Game;
 import escape.code.models.User;
-import escape.code.services.userservices.UserService;
-import escape.code.services.userservices.UserServiceImpl;
+import escape.code.services.userService.UserService;
+import escape.code.services.userService.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

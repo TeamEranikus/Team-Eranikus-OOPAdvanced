@@ -1,4 +1,4 @@
-package escape.code.daos.puzzledaos;
+package escape.code.daos.puzzleDAO;
 
 import escape.code.configurations.HibernateUtils;
 import escape.code.models.Puzzle;
@@ -17,7 +17,7 @@ public class PuzzleDaoImpl implements PuzzleDao {
     public List<Puzzle> getAllByLevel(int level) {
         session.beginTransaction();
         Query query = session
-                .createQuery("SELECT pu FROM Puzzle AS pu where pu.level like :level");
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.level like :level");
         query.setParameter("level",level);
 
         List<Puzzle> allPuzzle = query.list();
@@ -30,5 +30,16 @@ public class PuzzleDaoImpl implements PuzzleDao {
         session.beginTransaction();
         session.persist(puzzle);
         session.getTransaction().commit();
+    }
+
+    @Override
+    public Puzzle getOneById(long id) {
+        session.beginTransaction();
+        Query query = session
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.id like :id");
+        query.setParameter("id",id);
+        List<Puzzle> allPuzzle = query.list();
+        session.getTransaction().commit();
+        return allPuzzle.get(0);
     }
 }

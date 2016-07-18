@@ -1,0 +1,45 @@
+package escape.code.services.puzzleRectangleService;
+
+import escape.code.daos.puzzleDAO.PuzzleDao;
+import escape.code.daos.puzzleDAO.PuzzleDaoImpl;
+import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDao;
+import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDaoImpl;
+import escape.code.models.Puzzle;
+import escape.code.models.PuzzleRectangle;
+
+public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
+
+    private static PuzzleRectangleDao puzzleRectangleDao;
+    private static PuzzleDao puzzleDao;
+
+    static {
+        puzzleRectangleDao = new PuzzleRectangleDaoImpl();
+        puzzleDao = new PuzzleDaoImpl();
+    }
+
+    @Override
+    public void createPuzzleRectangle(String... params) {
+        PuzzleRectangle puzzleRectangle = new PuzzleRectangle();
+        puzzleRectangle.setName(params[0]);
+        puzzleRectangle.setLevel(Integer.parseInt(params[1]));
+        Puzzle puzzle = this.puzzleDao.getOneById(Long.parseLong(params[2]));
+        puzzleRectangle.setPuzzle(puzzle);
+        puzzleRectangleDao.createPuzzleRectangle(puzzleRectangle);
+
+    }
+
+    @Override
+    public PuzzleRectangle getFirst() {
+        return puzzleRectangleDao.getFirst();
+    }
+
+    @Override
+    public PuzzleRectangle getOneById(long id) {
+        return puzzleRectangleDao.getOneById(id);
+    }
+
+ /*   @Override
+    public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
+        return null;
+    }*/
+}

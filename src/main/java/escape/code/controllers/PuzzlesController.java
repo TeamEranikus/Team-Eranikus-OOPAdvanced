@@ -1,7 +1,6 @@
 package escape.code.controllers;
 
 import escape.code.models.Puzzle;
-import escape.code.utils.Constants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,7 +60,7 @@ public class PuzzlesController implements Initializable {
         if (puzzle.checkCorrectAnswer(userAnswerString)){
             this.nextClue.setText(puzzle.getNextClue());
             this.nextClue.setVisible(true);
-            Constants.IS_ANSWER_CORRECT = true;
+            puzzle.setAnswerGiven(true);
             this.answerButton.setDisable(true);
         }
         else{
