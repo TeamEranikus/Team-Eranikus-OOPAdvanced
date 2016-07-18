@@ -15,6 +15,11 @@ User-specific stuff:
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 .idea/*.*
+Team-Eranikus-OOPAdvanced/EscapeCode.iml
+Team-Eranikus-OOPAdvanced/.idea/*.*
+Team-Eranikus-OOPAdvanced/out/*.*
+Team-Eranikus-OOPAdvanced/target/*.*
+Team-Eranikus-OOPAdvanced/*.iml
 
 
 # Sensitive or high-churn files:
