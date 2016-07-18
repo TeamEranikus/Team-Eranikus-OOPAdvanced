@@ -25,11 +25,11 @@ User-specific stuff:
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 .idea/*.*
-/EscapeCode/EscapeCode.iml
-/EscapeCode/.idea/*.*
-/EscapeCode/out/*.*
-/EscapeCode/target/*.*
-/EscapeCode/*.iml
+/Team-Eranikus-OOPAdvanced/EscapeCode.iml
+/Team-Eranikus-OOPAdvanced/.idea/*.*
+/Team-Eranikus-OOPAdvanced/out/*.*
+/Team-Eranikus-OOPAdvanced/target/*.*
+/Team-Eranikus-OOPAdvanced/*.iml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
