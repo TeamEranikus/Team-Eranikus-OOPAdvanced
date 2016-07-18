@@ -42,7 +42,6 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao{
 
     @Override
     public PuzzleRectangle getOneById(long id) {
-        //session.beginTransaction();
         Query query = session.createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id");
         query.setParameter("id",id);
         List<PuzzleRectangle> rectangles = query.list();

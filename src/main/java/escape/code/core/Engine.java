@@ -6,6 +6,8 @@ import escape.code.models.Sprite;
 import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
+import escape.code.services.userService.UserService;
+import escape.code.services.userService.UserServiceImpl;
 import escape.code.utils.Constants;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -36,17 +38,18 @@ public class Engine {
     private FXMLLoader loader;
     private User user;
     private PuzzleRectangleService puzzleRectangleService;
-    FXMLLoader puzzleLoader;
+    private UserService userService;
+    private FXMLLoader puzzleLoader;
 
 
     public Engine(FXMLLoader loader, User user) {
         this.loader = loader;
         this.user = user;
+        this.userService = new UserServiceImpl();
         this.initialize();
     }
 
     private void initialize() {
-        // this.puzzleManager = new PuzzleManager();
         Scene scene = ((Pane) this.loader.getRoot()).getScene();
         this.currentLoadedStage = (Stage) (scene.getWindow());
         this.keys = new HashMap<>();
@@ -61,7 +64,6 @@ public class Engine {
         this.puzzleRectangleService = new PuzzleRectangleServiceImpl();
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-        //puzzleManager.load(user.getLevel());
     }
 
     public void play() throws IllegalStateException {
@@ -75,12 +77,12 @@ public class Engine {
 
         }
         if (user.getPuzzleRectangle().getPuzzle().isAnswerGiven()) {
-            //currentPuzzle.setVisible(false);
             currentPuzzle.setDisable(true);
             long puzzleRectangleId = user.getPuzzleRectangle().getId();
-            PuzzleRectangle puzzle = this.puzzleRectangleService.getOneById(puzzleRectangleId + 1); //TODO
+            PuzzleRectangle puzzle = this.puzzleRectangleService.getOneById(puzzleRectangleId + 1);
             this.user.setPuzzleRectangle(puzzle);
             currentPuzzle = getCurrentPuzzleRectangle();
+            this.userService.updateUser(this.user);
             hasToSetPuzzle = true;
         }
     }
