@@ -1,20 +1,21 @@
 package escape.code.services.puzzleRectangleService;
 
-import escape.code.daos.puzzleDAO.PuzzleDao;
-import escape.code.daos.puzzleDAO.PuzzleDaoImpl;
+import com.google.inject.Inject;
 import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDao;
-import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDaoImpl;
 import escape.code.models.Puzzle;
 import escape.code.models.PuzzleRectangle;
+import escape.code.services.puzzleService.PuzzleService;
+
+import java.util.List;
 
 public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
+    private PuzzleRectangleDao puzzleRectangleDao;
+    private PuzzleService puzzleService;
 
-    private static PuzzleRectangleDao puzzleRectangleDao;
-    private static PuzzleDao puzzleDao;
-
-    static {
-        puzzleRectangleDao = new PuzzleRectangleDaoImpl();
-        puzzleDao = new PuzzleDaoImpl();
+    @Inject
+    public PuzzleRectangleServiceImpl(PuzzleRectangleDao puzzleRectangleDao, PuzzleService puzzleService) {
+        this.puzzleRectangleDao = puzzleRectangleDao;
+        this.puzzleService = puzzleService;
     }
 
     @Override
@@ -22,9 +23,9 @@ public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
         PuzzleRectangle puzzleRectangle = new PuzzleRectangle();
         puzzleRectangle.setName(params[0]);
         puzzleRectangle.setLevel(Integer.parseInt(params[1]));
-        Puzzle puzzle = this.puzzleDao.getOneById(Long.parseLong(params[2]));
+        Puzzle puzzle = this.puzzleService.getOneById(Long.parseLong(params[2]));
         puzzleRectangle.setPuzzle(puzzle);
-        puzzleRectangleDao.createPuzzleRectangle(puzzleRectangle);
+        this.puzzleRectangleDao.createPuzzleRectangle(puzzleRectangle);
 
     }
 
@@ -38,8 +39,8 @@ public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
         return puzzleRectangleDao.getOneById(id);
     }
 
- /*   @Override
+    @Override
     public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
         return null;
-    }*/
+    }
 }

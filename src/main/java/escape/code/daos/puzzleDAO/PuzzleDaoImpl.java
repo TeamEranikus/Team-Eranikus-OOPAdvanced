@@ -1,45 +1,40 @@
 package escape.code.daos.puzzleDAO;
 
-import escape.code.configurations.HibernateUtils;
+import com.google.inject.Inject;
 import escape.code.models.Puzzle;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PuzzleDaoImpl implements PuzzleDao {
-    private static Session session;
-    static {
-        session = HibernateUtils.openSession();
-    }
+
+
+    @Inject
+    private EntityManager entityManager;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Puzzle> getAllByLevel(int level) {
-        session.beginTransaction();
-        Query query = session
-                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.level like :level");
-        query.setParameter("level",level);
-
-        List<Puzzle> allPuzzle = query.list();
-        session.getTransaction().commit();
-        return allPuzzle;
+      return this.entityManager
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.level like :level")
+                .setParameter("level",level)
+                .getResultList();
     }
 
     @Override
     public void createPuzzle(Puzzle puzzle) {
-        session.beginTransaction();
-        session.persist(puzzle);
-        session.getTransaction().commit();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(puzzle);
+        this.entityManager.getTransaction().commit();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Puzzle getOneById(long id) {
-        session.beginTransaction();
-        Query query = session
-                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.id like :id");
-        query.setParameter("id",id);
-        List<Puzzle> allPuzzle = query.list();
-        session.getTransaction().commit();
+        List<Puzzle> allPuzzle = this.entityManager
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.id like :id")
+                .setParameter("id",id)
+                .getResultList();
         return allPuzzle.get(0);
     }
 }

@@ -1,9 +1,9 @@
 package escape.code.controllers;
 
+import com.google.inject.Inject;
 import escape.code.core.Game;
 import escape.code.models.User;
 import escape.code.services.userService.UserService;
-import escape.code.services.userService.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -21,13 +21,11 @@ public class LoginController {
     @FXML
     private Label messageLabel;
 
+
+    @Inject
     private static UserService userService;
 
     private User user;
-
-    static {
-        userService = new UserServiceImpl();
-    }
 
     public void login(ActionEvent actionEvent) {
         String username = this.usernameField.getText();

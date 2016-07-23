@@ -1,5 +1,7 @@
 package escape.code.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,7 +16,8 @@ public class PuzzleRectangle {
     }
 
     @Id
-    @GeneratedValue()
+    @GenericGenerator(name="incr" , strategy="increment")
+    @GeneratedValue(generator="incr")
     public Long getId() {
         return id;
     }

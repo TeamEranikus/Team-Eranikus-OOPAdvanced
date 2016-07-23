@@ -3,7 +3,6 @@ package escape.code.core;
 import escape.code.controllers.PuzzlesController;
 import escape.code.models.Puzzle;
 import escape.code.services.puzzleService.PuzzleService;
-import escape.code.services.puzzleService.PuzzleServiceImpl;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ public class PuzzleManager {
 
     public PuzzleManager() {
         this.puzzles = new LinkedList<>();
-        this.puzzleService = new PuzzleServiceImpl();
+        //this.puzzleService = new PuzzleServiceImpl();
     }
 
     public void load(int level){

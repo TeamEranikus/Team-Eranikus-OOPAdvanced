@@ -1,13 +1,12 @@
 package escape.code.core;
 
+import com.google.inject.Inject;
 import escape.code.controllers.PuzzlesController;
 import escape.code.models.PuzzleRectangle;
 import escape.code.models.Sprite;
 import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
-import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
 import escape.code.services.userService.UserService;
-import escape.code.services.userService.UserServiceImpl;
 import escape.code.utils.Constants;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -25,7 +24,10 @@ import java.util.HashMap;
 
 public class Engine {
 
-    // private PuzzleManager puzzleManager;
+    @Inject
+    private static PuzzleRectangleService puzzleRectangleService;
+
+    private UserService userService;
     private HashMap<KeyCode, Boolean> keys;
     private ObservableMap<String, Object> objectsInCurrentScene;
     private ArrayList<Rectangle> rectCollision;
@@ -37,15 +39,13 @@ public class Engine {
     private Stage currentLoadedStage;
     private FXMLLoader loader;
     private User user;
-    private PuzzleRectangleService puzzleRectangleService;
-    private UserService userService;
     private FXMLLoader puzzleLoader;
 
 
-    public Engine(FXMLLoader loader, User user) {
+    public Engine(FXMLLoader loader, User user, UserService userService) {
+        this.userService = userService;
         this.loader = loader;
         this.user = user;
-        this.userService = new UserServiceImpl();
         this.initialize();
     }
 
@@ -61,7 +61,6 @@ public class Engine {
         this.sprite = new Sprite(playerImage, canvas);
         this.currentPuzzle = getCurrentPuzzleRectangle();
         this.loadRectanglesCollision();
-        this.puzzleRectangleService = new PuzzleRectangleServiceImpl();
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
     }
@@ -82,7 +81,7 @@ public class Engine {
             PuzzleRectangle puzzle = this.puzzleRectangleService.getOneById(puzzleRectangleId + 1);
             this.user.setPuzzleRectangle(puzzle);
             currentPuzzle = getCurrentPuzzleRectangle();
-            this.userService.updateUser(this.user);
+            userService.updateUser(this.user);
             hasToSetPuzzle = true;
         }
     }
@@ -99,13 +98,13 @@ public class Engine {
                 //this.setItemCount("bookOne");
             }
             puzzleLoader = stageManager.loadSceneToPrimaryStage(new Stage(), Constants.PUZZLE_FXML_PATH);
-            keys.clear();
         } else {
             currentLoadedStage.close();
             PuzzleRectangle puzzle = user.getPuzzleRectangle();
             user.setPuzzleRectangle(this.puzzleRectangleService.getOneById(puzzle.getId() + 1));
             throw new IllegalStateException("STOP");
         }
+        keys.clear();
     }
 
     private void updateSpriteCoordinates() {

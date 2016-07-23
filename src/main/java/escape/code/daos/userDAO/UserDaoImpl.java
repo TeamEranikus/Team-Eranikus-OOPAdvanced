@@ -1,18 +1,17 @@
 package escape.code.daos.userDAO;
 
-import escape.code.configurations.HibernateUtils;
+import com.google.inject.Inject;
 import escape.code.models.User;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao{
 
-    private static Session session;
-    static {
-        session = HibernateUtils.openSession();
-    }
+    @Inject
+    private EntityManager entityManager;
+
 
     @Override
     public User getLogedUser(String username, String password) {
@@ -25,32 +24,28 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    @Override
     public void create(User user) {
         User currentUser = this.getUserByName(user.getName());
         if(currentUser != null){
             throw new IllegalArgumentException("User already exist!");
         }
-        session.beginTransaction();
-        session.persist(user);
-        session.getTransaction().commit();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(user);
+        this.entityManager.getTransaction().commit();
     }
 
     @Override
     public void updateUser(User user) {
-        session.beginTransaction();
-        session.update(user);
-        session.getTransaction().commit();
+        this.entityManager.merge(user);
     }
 
     private User getUserByName(String userName) {
-        session.beginTransaction();
-        Query query = session.createQuery("select us from User as us where us.name = :name");
+        Query query = this.entityManager.createQuery("select us from User as us where us.name = :name");
         query.setParameter("name", userName);
-        session.getTransaction().commit();
-        List<User> users = query.list();
-        if (users.size() == 0)
+        List<User> users = query.getResultList();
+        if (users.size() == 0){
             return null;
+        }
 
         return users.get(0);
     }

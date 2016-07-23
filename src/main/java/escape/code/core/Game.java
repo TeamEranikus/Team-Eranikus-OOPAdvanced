@@ -1,9 +1,9 @@
 package escape.code.core;
 
+import com.google.inject.Inject;
 import escape.code.enums.Level;
 import escape.code.models.User;
 import escape.code.services.userService.UserService;
-import escape.code.services.userService.UserServiceImpl;
 import escape.code.utils.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
@@ -19,29 +19,23 @@ public class Game {
     private static FXMLLoader fxmlLoader;
     private static StageManager stageManager;
     private static AnimationTimer timeline;
+    @Inject
     private static UserService userService;
+
     private static Stage currentStage;
 
     private static Media media;
     private static MediaPlayer mediaPlayer;
 
-    //    public Game(Stage stage) {
-//        currentStage = stage;
-//        stageManager = new StageManager();
-//        userService = new UserServiceImpl();
-//        login();
-//    }
-
      public static void initialize(Stage stage){
          currentStage = stage;
          stageManager = new StageManager();
-         userService = new UserServiceImpl();
          login();
      }
 
     public static void run() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
-        engine = new Engine(fxmlLoader, user);
+        engine = new Engine(fxmlLoader, user, userService);
         playAudioClip();
         timeline = new AnimationTimer() {
             @Override
@@ -54,7 +48,7 @@ public class Game {
                     //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);
-                    engine = new Engine(fxmlLoader, user);
+                    engine = new Engine(fxmlLoader, user, userService);
                     mediaPlayer.play();
 
                 } catch (NullPointerException ex) {

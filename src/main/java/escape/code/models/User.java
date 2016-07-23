@@ -1,6 +1,7 @@
 package escape.code.models;
 
 import escape.code.enums.Item;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,8 @@ public class User implements Serializable{
     private PuzzleRectangle puzzleRectangle;
 
     @Id
-    @GeneratedValue()
+    @GenericGenerator(name="incr" , strategy="increment")
+    @GeneratedValue(generator="incr")
     public Long getId() {
         return id;
     }
@@ -61,7 +63,7 @@ public class User implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "puzzle_rectangle", nullable = false)
+    @JoinColumn(name = "puzzle_rectangle", nullable = true)
     public PuzzleRectangle getPuzzleRectangle() {
         return this.puzzleRectangle;
     }

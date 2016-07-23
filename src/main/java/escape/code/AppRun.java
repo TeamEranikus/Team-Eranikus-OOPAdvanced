@@ -1,10 +1,11 @@
 package escape.code;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import escape.code.configurations.InjectionModule;
 import escape.code.core.Game;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
-import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
 import escape.code.services.puzzleService.PuzzleService;
-import escape.code.services.puzzleService.PuzzleServiceImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,7 +16,6 @@ public class AppRun extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
 
 //        //Todo: when you first build the program change hibernateUnils line 55 form update to create, then comment from here
         String[][] taskParams = {
@@ -28,7 +28,8 @@ public class AppRun extends Application {
                 {"Who collects the garbage?", "garbage collector", "Be like Java!! Collect your own garbage.", "The second door is open now.", "/pictures/Bin.png", "1", "KEY"},
                 {"Success pass the level", "", "", "", "/pictures/LibraryWithJoker.jpg", "0", "NONE"} //// TODO: 7/17/2016
         };
-        PuzzleService puzzleService = new PuzzleServiceImpl();
+        Injector injector = Guice.createInjector(new InjectionModule());
+        PuzzleService puzzleService = injector.getInstance(PuzzleService.class);
         Arrays.stream(taskParams).forEach(puzzleService::createPuzzle);
 //        // Todo: to here, and change to update again
         String[][] taskParamsRect = {
@@ -42,10 +43,11 @@ public class AppRun extends Application {
                 {"door", "1", "8"},
 
         };
-        PuzzleRectangleService puzzleRectangleService = new PuzzleRectangleServiceImpl();
+        PuzzleRectangleService puzzleRectangleService = injector.getInstance(PuzzleRectangleService.class);
         Arrays.stream(taskParamsRect).forEach(puzzleRectangleService::createPuzzleRectangle);
 
         Game.initialize(primaryStage);
+
     }
 
     public static void main(String[] args) {

@@ -19,11 +19,11 @@ public enum Level {
     }
 
     private int getNum() {
-        return num;
+        return this.num;
     }
 
     public String getPath() {
-        return path;
+        return this.path;
     }
 
     public static Level getByNum(int num){

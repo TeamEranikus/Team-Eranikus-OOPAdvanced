@@ -1,6 +1,7 @@
 package escape.code.models;
 
 import escape.code.enums.Item;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -48,7 +49,8 @@ public class Puzzle implements Serializable {
     }
 
     @Id
-    @GeneratedValue()
+    @GenericGenerator(name="incr" , strategy="increment")
+    @GeneratedValue(generator="incr")
     public Long getId() {
         return id;
     }

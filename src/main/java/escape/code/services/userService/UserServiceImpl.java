@@ -1,23 +1,20 @@
 package escape.code.services.userService;
 
-import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDao;
-import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDaoImpl;
+import com.google.inject.Inject;
 import escape.code.daos.userDAO.UserDao;
-import escape.code.daos.userDAO.UserDaoImpl;
 import escape.code.enums.Item;
 import escape.code.models.PuzzleRectangle;
 import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
-import escape.code.services.puzzleRectangleService.PuzzleRectangleServiceImpl;
 
 public class UserServiceImpl implements UserService {
+    private UserDao userDao;
+    private PuzzleRectangleService puzzleRectangleService;
 
-    private static UserDao userDao;
-    private static PuzzleRectangleService puzzleRectangleService;
-
-    static {
-        userDao = new UserDaoImpl();
-        puzzleRectangleService = new PuzzleRectangleServiceImpl();
+    @Inject
+    public UserServiceImpl(UserDao userDao, PuzzleRectangleService puzzleRectangleService) {
+        this.userDao = userDao;
+        this.puzzleRectangleService = puzzleRectangleService;
     }
 
     @Override

@@ -2,10 +2,8 @@ package escape.code.controllers;
 
 import escape.code.core.StageManager;
 import escape.code.utils.Constants;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

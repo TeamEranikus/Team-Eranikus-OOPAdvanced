@@ -1,50 +1,47 @@
 package escape.code.daos.puzzleRectangleDAO;
 
-import escape.code.configurations.HibernateUtils;
+import com.google.inject.Inject;
 import escape.code.models.PuzzleRectangle;
-import javafx.scene.shape.Rectangle;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao{
+public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
 
-    private static Session session;
-    static {
-        session = HibernateUtils.openSession();
+    @Inject
+    private EntityManager entityManager;
 
-    }
     @Override
     public void createPuzzleRectangle(PuzzleRectangle currentRectangle) {
-        session.beginTransaction();
-        session.persist(currentRectangle);
-        session.getTransaction().commit();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(currentRectangle);
+        this.entityManager.getTransaction().commit();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public PuzzleRectangle getFirst() {
-        session.beginTransaction();
-        Query query = session.createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id");
-        query.setParameter("id",1L);
-        List<PuzzleRectangle> rectangles = query.list();
+        List<PuzzleRectangle> rectangles = this.entityManager
+                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id")
+                .setParameter("id",1L).getResultList();
         return rectangles.get(0);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
-        session.beginTransaction();
-        Query query = session.createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.level like :level");
-        query.setParameter("level",level);
-        List<PuzzleRectangle> rectangles = query.list();
+        List<PuzzleRectangle> rectangles = this.entityManager
+                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.level like :level")
+                .setParameter("level", level).getResultList();
         return rectangles;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public PuzzleRectangle getOneById(long id) {
-        Query query = session.createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id");
-        query.setParameter("id",id);
-        List<PuzzleRectangle> rectangles = query.list();
+        List<PuzzleRectangle> rectangles = this.entityManager
+                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id")
+                .setParameter("id", id).getResultList();
         return rectangles.get(0);
     }
 }
