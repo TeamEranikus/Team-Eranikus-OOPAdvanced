@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "puzzle")
+@Table(name = "puzzles")
 public class Puzzle implements Serializable {
     private Long id;
     private String question;
@@ -49,8 +49,8 @@ public class Puzzle implements Serializable {
     }
 
     @Id
-    @GenericGenerator(name="incr" , strategy="increment")
-    @GeneratedValue(generator="incr")
+    @GenericGenerator(name="incrementor" , strategy="increment")
+    @GeneratedValue(generator="incrementor")
     public Long getId() {
         return id;
     }

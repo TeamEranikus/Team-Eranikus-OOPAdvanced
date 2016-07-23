@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PuzzlesController implements Initializable {
+public class PuzzleController implements Initializable {
     @FXML
     Button hintButton;
     @FXML
@@ -31,7 +31,6 @@ public class PuzzlesController implements Initializable {
     Button answerButton;
 
     private static Puzzle puzzle;
-
 
     public static void setPuzzle(Puzzle puzzleToSet){
         puzzle = puzzleToSet;

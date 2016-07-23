@@ -16,8 +16,8 @@ public class PuzzleRectangle {
     }
 
     @Id
-    @GenericGenerator(name="incr" , strategy="increment")
-    @GeneratedValue(generator="incr")
+    @GenericGenerator(name="incrementor" , strategy="increment")
+    @GeneratedValue(generator="incrementor")
     public Long getId() {
         return id;
     }

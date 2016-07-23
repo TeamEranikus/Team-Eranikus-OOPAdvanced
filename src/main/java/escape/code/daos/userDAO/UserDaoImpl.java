@@ -36,7 +36,9 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void updateUser(User user) {
+        this.entityManager.getTransaction().begin();
         this.entityManager.merge(user);
+        this.entityManager.getTransaction().commit();
     }
 
     private User getUserByName(String userName) {

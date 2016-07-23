@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.1.9.Final</version>
+            <version>5.2.1.Final</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.1.9.Final</version>
+            <version>5.2.1.Final</version>
         </dependency>
     </dependencies>
     <build>
@@ -65,6 +65,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

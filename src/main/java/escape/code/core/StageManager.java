@@ -17,7 +17,7 @@ public class StageManager {
     public FXMLLoader loadSceneToPrimaryStage(Stage currentStage, String fxmlPath) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         try {
-            Region region = (Region) fxmlLoader.load();
+            Region region = fxmlLoader.load();
             double origW = Constants.FULL_HD_WIDTH;
             double origH = Constants.FULL_HD_HIGH;
 
@@ -38,6 +38,7 @@ public class StageManager {
             Scene scene = new Scene(rootPane, origW, origH);
             group.scaleXProperty().bind(scene.widthProperty().divide(origW));
             group.scaleYProperty().bind(scene.heightProperty().divide(origH));
+            currentStage.setTitle(Constants.TITLE);
             currentStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,8 +52,8 @@ public class StageManager {
         Stage newStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         newStage.setTitle(Constants.TITLE);
-        root = (AnchorPane) fxmlLoader.getRoot();
-        Region contentRootRegion = (Region) FXMLLoader.load(getClass().getResource(fxmlPath));
+        root = fxmlLoader.getRoot();
+        Region contentRootRegion = FXMLLoader.load(getClass().getResource(fxmlPath));
         double origW = Constants.FULL_HD_WIDTH;
         double origH = Constants.FULL_HD_HIGH;
 

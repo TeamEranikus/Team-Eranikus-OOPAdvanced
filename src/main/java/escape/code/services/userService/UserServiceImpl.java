@@ -2,7 +2,6 @@ package escape.code.services.userService;
 
 import com.google.inject.Inject;
 import escape.code.daos.userDAO.UserDao;
-import escape.code.enums.Item;
 import escape.code.models.PuzzleRectangle;
 import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
@@ -22,7 +21,6 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(username);
         user.setPassword(password);
-        user.setItem(Item.NONE);
         user.setLevel(0);
         PuzzleRectangle puzzleRectangle = puzzleRectangleService.getFirst();
         user.setPuzzleRectangle(puzzleRectangle);

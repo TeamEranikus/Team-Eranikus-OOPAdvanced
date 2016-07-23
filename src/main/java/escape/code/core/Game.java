@@ -14,17 +14,16 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class Game {
+
+    @Inject
+    private static UserService userService;
+
     private static User user;
     private static Engine engine;
     private static FXMLLoader fxmlLoader;
     private static StageManager stageManager;
     private static AnimationTimer timeline;
-    @Inject
-    private static UserService userService;
-
     private static Stage currentStage;
-
-    private static Media media;
     private static MediaPlayer mediaPlayer;
 
      public static void initialize(Stage stage){
@@ -50,7 +49,6 @@ public class Game {
                     userService.updateUser(user);
                     engine = new Engine(fxmlLoader, user, userService);
                     mediaPlayer.play();
-
                 } catch (NullPointerException ex) {
                     timeline.stop();
                 }
@@ -75,7 +73,7 @@ public class Game {
 
         File file = new File(Constants.SOUNDS_PATH);
         String MEDIA_URL = file.toURI().toString();
-        media = new Media(MEDIA_URL);
+        Media media = new Media(MEDIA_URL);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     }

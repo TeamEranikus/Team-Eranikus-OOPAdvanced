@@ -12,7 +12,6 @@ public class User implements Serializable{
     private String name;
     private String password;
     private Long id;
-    private Item item;
     private int level;
     private PuzzleRectangle puzzleRectangle;
 
@@ -28,14 +27,6 @@ public class User implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     public String getName() {

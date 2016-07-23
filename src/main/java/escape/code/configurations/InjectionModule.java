@@ -23,6 +23,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+
 public class InjectionModule extends AbstractModule {
 
     private static final ThreadLocal<EntityManager> ENTITY_MANAGER_CACHE = new ThreadLocal<>();
@@ -54,5 +55,4 @@ public class InjectionModule extends AbstractModule {
         }
         return entityManager;
     }
-
 }
