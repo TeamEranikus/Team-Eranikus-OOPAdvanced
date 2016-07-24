@@ -24,6 +24,7 @@ EscapeCode.iml
 .idea/*.*
 out/*.*
 target/*.*
+terget/classes/META-INF/*xml
 *.iml
 
 

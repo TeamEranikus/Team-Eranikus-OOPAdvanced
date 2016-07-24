@@ -44,17 +44,17 @@ public class Engine {
     private FXMLLoader loader;
     private User user;
 
-    public Engine(FXMLLoader loader, User user, UserService userService) {
+    public Engine(FXMLLoader loader, User user, UserService userService, StageManager stageManager) {
         this.userService = userService;
         this.loader = loader;
         this.user = user;
+        this.stageManager = stageManager;
         this.initialize();
     }
 
     private void initialize() {
         this.keys = new HashMap<>();
         this.rectCollision = new ArrayList<>();
-        this.stageManager = new StageManager();
         Scene scene = ((Pane) this.loader.getRoot()).getScene();
         this.currentLoadedStage = (Stage) (scene.getWindow());
         this.objectsInCurrentScene = loader.getNamespace();
@@ -75,7 +75,6 @@ public class Engine {
             this.setCurrentPuzzle();
             this.sprite.getImageView().setLayoutX(DEFAULT_SPRITE_X_POSITION);
             this.sprite.getImageView().setLayoutY(DEFAULT_SPRITE_Y_POSITION);
-
         }
 
         if (currentPuzzle.isAnswerGiven()) {
@@ -92,7 +91,6 @@ public class Engine {
 
     private void setCurrentPuzzle() throws IllegalStateException {
         if (!this.currentPuzzleRectangle.getId().contains("door")) {
-
             if (this.hasToSetPuzzle) {
                 this.hasToSetPuzzle = false;
                 Puzzle currentPuzzle = this.user.getPuzzleRectangle().getPuzzle();
@@ -110,13 +108,10 @@ public class Engine {
 
 
     private void loadRectanglesCollision() {
-        for (String id : this.objectsInCurrentScene.keySet()) {
-            if (id.endsWith("Col")) {
-                Rectangle current = (Rectangle) this.objectsInCurrentScene.get(id);
-                rectCollision.add(current);
-            }
-
-        }
+        this.objectsInCurrentScene.keySet().stream().filter(id -> id.endsWith("Col")).forEach(id -> {
+            Rectangle current = (Rectangle) this.objectsInCurrentScene.get(id);
+            this.rectCollision.add(current);
+        });
 
     }
 

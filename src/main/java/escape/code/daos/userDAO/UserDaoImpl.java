@@ -41,6 +41,7 @@ public class UserDaoImpl implements UserDao{
         this.entityManager.getTransaction().commit();
     }
 
+    @SuppressWarnings("unchecked")
     private User getUserByName(String userName) {
         Query query = this.entityManager.createQuery("select us from User as us where us.name = :name");
         query.setParameter("name", userName);

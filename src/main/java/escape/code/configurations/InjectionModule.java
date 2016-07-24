@@ -6,6 +6,7 @@ import com.google.inject.Singleton;
 import escape.code.controllers.LoginController;
 import escape.code.core.Engine;
 import escape.code.core.Game;
+import escape.code.core.StageManager;
 import escape.code.daos.puzzleDAO.PuzzleDao;
 import escape.code.daos.puzzleDAO.PuzzleDaoImpl;
 import escape.code.daos.puzzleRectangleDAO.PuzzleRectangleDao;
@@ -27,6 +28,7 @@ import javax.persistence.Persistence;
 public class InjectionModule extends AbstractModule {
 
     private static final ThreadLocal<EntityManager> ENTITY_MANAGER_CACHE = new ThreadLocal<>();
+    private static final ThreadLocal<StageManager> STAGE_MANAGER_CACHE = new ThreadLocal<>();
 
     public void configure() {
         bind(UserDao.class).to(UserDaoImpl.class);
@@ -54,5 +56,15 @@ public class InjectionModule extends AbstractModule {
             ENTITY_MANAGER_CACHE.set(entityManager = entityManagerFactory.createEntityManager());
         }
         return entityManager;
+    }
+
+    @Provides
+    @Singleton
+    public StageManager provideStageManager() {
+        StageManager stageManager = STAGE_MANAGER_CACHE.get();
+        if (stageManager == null) {
+            STAGE_MANAGER_CACHE.set(stageManager = new StageManager());
+        }
+        return stageManager;
     }
 }

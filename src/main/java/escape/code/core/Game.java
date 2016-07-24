@@ -16,25 +16,25 @@ import java.io.File;
 public class Game {
 
     @Inject
+    private static StageManager stageManager;
+    @Inject
     private static UserService userService;
 
     private static User user;
     private static Engine engine;
     private static FXMLLoader fxmlLoader;
-    private static StageManager stageManager;
     private static AnimationTimer timeline;
     private static Stage currentStage;
     private static MediaPlayer mediaPlayer;
 
      public static void initialize(Stage stage){
          currentStage = stage;
-         stageManager = new StageManager();
          login();
      }
 
     public static void run() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
-        engine = new Engine(fxmlLoader, user, userService);
+        engine = new Engine(fxmlLoader, user, userService, stageManager);
         playAudioClip();
         timeline = new AnimationTimer() {
             @Override
@@ -47,7 +47,7 @@ public class Game {
                     //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);
-                    engine = new Engine(fxmlLoader, user, userService);
+                    engine = new Engine(fxmlLoader, user, userService, stageManager);
                     mediaPlayer.play();
                 } catch (NullPointerException ex) {
                     timeline.stop();

@@ -1,5 +1,6 @@
 package escape.code.controllers;
 
+import com.google.inject.Inject;
 import escape.code.core.Game;
 import escape.code.core.StageManager;
 import escape.code.utils.Constants;
@@ -23,6 +24,8 @@ public class MenuController {
     private Button quitButton;
 
     private Stage currentStage;
+
+    @Inject
     private StageManager stageManager;
 
     public void onNewGameClicked(ActionEvent event) throws IOException {
@@ -31,7 +34,6 @@ public class MenuController {
 
     public void onHowToPlayClicked(ActionEvent event) throws IOException {
         currentStage = (Stage)howToPlayButton.getScene().getWindow();
-        stageManager = new StageManager();
         stageManager.loadSceneToPrimaryStage(currentStage,Constants.HOW_TO_PLAY_FXML_PATH);
     }
 

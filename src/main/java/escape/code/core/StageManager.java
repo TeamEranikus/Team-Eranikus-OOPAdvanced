@@ -1,5 +1,6 @@
 package escape.code.core;
 
+import com.google.inject.Singleton;
 import escape.code.utils.Constants;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+@Singleton
 public class StageManager {
     private AnchorPane root;
     public FXMLLoader loadSceneToPrimaryStage(Stage currentStage, String fxmlPath) {
@@ -52,7 +53,7 @@ public class StageManager {
         Stage newStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         newStage.setTitle(Constants.TITLE);
-        root = fxmlLoader.getRoot();
+        this.root = fxmlLoader.getRoot();
         Region contentRootRegion = FXMLLoader.load(getClass().getResource(fxmlPath));
         double origW = Constants.FULL_HD_WIDTH;
         double origH = Constants.FULL_HD_HIGH;
