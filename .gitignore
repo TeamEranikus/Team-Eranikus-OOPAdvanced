@@ -1,8 +1,5 @@
 *.class
-*.png
 *.wav
-*.fxml
-*.jpg
 *.mp3
 
 # Mobile Tools for Java (J2ME)
