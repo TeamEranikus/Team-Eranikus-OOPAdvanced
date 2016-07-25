@@ -11,6 +11,7 @@ public class Constants {
     public static final String SPRITE_IMAGE_LEFT_PATH = "/pictures/emoticon_left.png";
     public static final String SPRITE_IMAGE_RIGHT_PATH = "/pictures/emoticon_right.png";
     public static final String FIRST_LEVEL_FXML_PATH = "/fxmls/firstLevelScene.fxml";
+    public static final String SECOND_LEVEL_FXML_PATH = "/fxmls/secondLevel.fxml";
     public static final String SOUNDS_PATH = "target/classes/sounds/snd_music_next.mp3";
     public static double FULL_HD_WIDTH = 1920.0D;
     public static double FULL_HD_HIGH = 1080.0D;

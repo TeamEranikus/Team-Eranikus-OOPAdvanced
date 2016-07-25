@@ -100,7 +100,14 @@ public class Engine {
         } else {
             currentLoadedStage.close();
             PuzzleRectangle puzzle = user.getPuzzleRectangle();
-            user.setPuzzleRectangle(puzzleRectangleService.getOneById(puzzle.getId() + PUZZLE_INCREMENTOR));
+            long puzzleId = puzzle.getId();
+            //TODO: Make game finished scene and show it
+
+            //Exeption is throwed if this is missing
+            if (puzzleId == 12){
+                puzzleId = 0;
+            }
+            user.setPuzzleRectangle(puzzleRectangleService.getOneById(puzzleId + PUZZLE_INCREMENTOR));
             throw new IllegalStateException("STOP");
         }
         keys.clear();

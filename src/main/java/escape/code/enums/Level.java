@@ -8,7 +8,8 @@ import java.util.Arrays;
 public enum Level {
     ZERO(0, Constants.DEMO_LEVEL_FXML_PATH),
     ONE(1, Constants.FIRST_LEVEL_FXML_PATH),
-    MENU(2, Constants.MENU_FXML_PATH);
+    TWO(2, Constants.SECOND_LEVEL_FXML_PATH),
+    MENU(3, Constants.MENU_FXML_PATH);
 
     private int num;
     private String path;

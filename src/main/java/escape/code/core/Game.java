@@ -43,7 +43,7 @@ public class Game {
                     engine.play();
                 } catch (IllegalStateException e) {
                     mediaPlayer.stop();
-                    user.setLevel((user.getLevel() + 1) % 2);
+                    user.setLevel((user.getLevel() + 1) % 3);
                     //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);
