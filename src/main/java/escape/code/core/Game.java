@@ -50,6 +50,7 @@ public class Game {
                     engine = new Engine(fxmlLoader, user, userService, stageManager);
                     mediaPlayer.play();
                 } catch (NullPointerException ex) {
+                    ex.printStackTrace();
                     timeline.stop();
                 }
             }

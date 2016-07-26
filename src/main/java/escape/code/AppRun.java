@@ -4,12 +4,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import escape.code.configurations.InjectionModule;
 import escape.code.core.Game;
-import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
-import escape.code.services.puzzleService.PuzzleService;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
 
 
 public class AppRun extends Application {
@@ -18,7 +14,7 @@ public class AppRun extends Application {
     public void start(Stage primaryStage) {
 
         //Todo: when you first build the program change hibernateUnils line 55 form update to create, then comment from here
-        String[][] taskParams = {
+       /* String[][] taskParams = {
                 {"-What the following code will print?", "piano", "Do you really need the numbers?", "What could it be??", "/pictures/ComputerTaskWhite.png", "0", "NONE"},
                 {"-One piano button is stuck!", "13", "How will you EXit?", "You are one step away from the exit.", "/pictures/PianoTask.jpg", "0", "BOOK"},
                 {"-The way to unlock the door is to know the secret number.", "111", "Do you see something unusual?", "The door is open now.", "/pictures/LibraryWithJoker.jpg", "0", "KEY"},
@@ -48,12 +44,12 @@ public class AppRun extends Application {
                 {"tablet", "2", "9"},
                 {"testing", "2", "10"},
                 {"microscope", "2", "11"},
-                {"door", "2", "12"}
+                {"exit", "2", "12"}
 
         };
         PuzzleRectangleService puzzleRectangleService = injector.getInstance(PuzzleRectangleService.class);
-        Arrays.stream(taskParamsRect).forEach(puzzleRectangleService::createPuzzleRectangle);
-        //Injector injector = Guice.createInjector(new InjectionModule());
+        Arrays.stream(taskParamsRect).forEach(puzzleRectangleService::createPuzzleRectangle);*/
+        Injector injector = Guice.createInjector(new InjectionModule());
         Game.initialize(primaryStage);
 
     }

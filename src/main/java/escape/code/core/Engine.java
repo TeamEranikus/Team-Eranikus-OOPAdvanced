@@ -25,9 +25,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Engine {
-    private final int PUZZLE_INCREMENTOR = 1;
+    private final int PUZZLE_INCREMENTER = 1;
     private final int DEFAULT_SPRITE_X_POSITION = 480;
     private final int DEFAULT_SPRITE_Y_POSITION = 300;
+    private final String END_LEVEL_RECTANGLE_ID = "door";
+    private final String END_GAME_RECTANGLE_ID = "exit";
+    private final String STOP_TIMER = "STOP";
 
     @Inject
     private static PuzzleRectangleService puzzleRectangleService;
@@ -80,7 +83,7 @@ public class Engine {
         if (currentPuzzle.isAnswerGiven()) {
             this.currentPuzzleRectangle.setDisable(true);
             long puzzleRectangleId = this.user.getPuzzleRectangle().getId();
-            PuzzleRectangle puzzle = puzzleRectangleService.getOneById(puzzleRectangleId + PUZZLE_INCREMENTOR);
+            PuzzleRectangle puzzle = puzzleRectangleService.getOneById(puzzleRectangleId + PUZZLE_INCREMENTER);
             this.user.setPuzzleRectangle(puzzle);
             this.currentPuzzleRectangle = getCurrentPuzzleRectangle();
             this.userService.updateUser(this.user);
@@ -90,25 +93,25 @@ public class Engine {
     }
 
     private void setCurrentPuzzle() throws IllegalStateException {
-        if (!this.currentPuzzleRectangle.getId().contains("door")) {
+        String currentPuzzleRectangleId = this.currentPuzzleRectangle.getId();
+        if (!currentPuzzleRectangleId.contains(END_LEVEL_RECTANGLE_ID)
+                && !currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)) {
             if (this.hasToSetPuzzle) {
                 this.hasToSetPuzzle = false;
                 Puzzle currentPuzzle = this.user.getPuzzleRectangle().getPuzzle();
                 PuzzleController.setPuzzle(currentPuzzle);
             }
             stageManager.loadSceneToPrimaryStage(new Stage(), Constants.PUZZLE_FXML_PATH);
+        }else if (currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)){
+            this.userService.updateUser(user);
+            //TODO here is the end of the game
+            System.exit(0);
         } else {
-            currentLoadedStage.close();
+            this.currentLoadedStage.close();
             PuzzleRectangle puzzle = user.getPuzzleRectangle();
             long puzzleId = puzzle.getId();
-            //TODO: Make game finished scene and show it
-
-            //Exeption is throwed if this is missing
-            if (puzzleId == 12){
-                puzzleId = 0;
-            }
-            user.setPuzzleRectangle(puzzleRectangleService.getOneById(puzzleId + PUZZLE_INCREMENTOR));
-            throw new IllegalStateException("STOP");
+            this.user.setPuzzleRectangle(puzzleRectangleService.getOneById(puzzleId + PUZZLE_INCREMENTER));
+            throw new IllegalStateException(STOP_TIMER);
         }
         keys.clear();
     }
