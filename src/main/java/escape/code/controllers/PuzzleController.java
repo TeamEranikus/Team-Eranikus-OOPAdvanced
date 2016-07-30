@@ -14,16 +14,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PuzzleController implements Initializable {
+
     @FXML
     Button hintButton;
+
     @FXML
     Label hintText;
+
     @FXML
     Label description;
+
     @FXML
     Label nextClue;
+
     @FXML
     ImageView puzzleImage;
+
     @FXML
     TextField userAnswer;
 
@@ -32,7 +38,7 @@ public class PuzzleController implements Initializable {
 
     private static Puzzle puzzle;
 
-    public static void setPuzzle(Puzzle puzzleToSet){
+    public static void setPuzzle(Puzzle puzzleToSet) {
         puzzle = puzzleToSet;
     }
 
@@ -43,12 +49,10 @@ public class PuzzleController implements Initializable {
         this.hintText.setText(puzzle.getHint());
         this.description.setText(puzzle.getQuestion());
         this.nextClue.setText("Incorrect answer!");
-
-
     }
 
     public void giveHint(ActionEvent actionEvent) {
-        if(actionEvent.getSource()==hintButton) {
+        if (actionEvent.getSource() == hintButton) {
             this.hintText.setVisible(true);
         }
     }
@@ -56,13 +60,12 @@ public class PuzzleController implements Initializable {
 
     public void checkAnswer(ActionEvent actionEvent) {
         String userAnswerString = this.userAnswer.getText().toLowerCase().trim();
-        if (puzzle.checkCorrectAnswer(userAnswerString)){
+        if (puzzle.checkCorrectAnswer(userAnswerString)) {
             this.nextClue.setText(puzzle.getNextClue());
             this.nextClue.setVisible(true);
             puzzle.setAnswerGiven(true);
             this.answerButton.setDisable(true);
-        }
-        else{
+        } else {
             this.nextClue.setVisible(true);
         }
     }

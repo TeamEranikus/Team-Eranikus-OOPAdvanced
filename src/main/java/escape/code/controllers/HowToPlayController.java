@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class HowToPlayController {
@@ -16,10 +17,10 @@ public class HowToPlayController {
     private Stage currentStage;
 
     @Inject
-    private StageManager stageManager;
+    private static StageManager stageManager;
 
-    public void  backToMenu(ActionEvent event) throws IOException {
-        currentStage = (Stage) backToGame.getScene().getWindow();
-        stageManager.loadSceneToPrimaryStage(currentStage,Constants.MENU_FXML_PATH);
+    public void backToMenu(ActionEvent event) throws IOException {
+        this.currentStage = (Stage) this.backToGame.getScene().getWindow();
+        stageManager.loadSceneToPrimaryStage(this.currentStage, Constants.MENU_FXML_PATH);
     }
 }

@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import escape.code.daos.puzzleDAO.PuzzleDao;
 import escape.code.enums.Item;
 import escape.code.models.Puzzle;
-
 import java.util.List;
 
 public class PuzzleServiceImpl implements PuzzleService {
@@ -15,6 +14,7 @@ public class PuzzleServiceImpl implements PuzzleService {
     public PuzzleServiceImpl(PuzzleDao puzzleDao){
         this.puzzleDao = puzzleDao;
     }
+
     @Override
     public void createPuzzle(String... params) {
         Puzzle puzzle = new Puzzle();
@@ -35,6 +35,6 @@ public class PuzzleServiceImpl implements PuzzleService {
 
     @Override
     public Puzzle getOneById(long id) {
-        return puzzleDao.getOneById(id);
+        return this.puzzleDao.getOneById(id);
     }
 }

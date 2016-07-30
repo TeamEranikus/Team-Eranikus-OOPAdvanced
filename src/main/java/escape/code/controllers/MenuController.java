@@ -13,10 +13,6 @@ import java.io.IOException;
 
 public class MenuController {
 
-    // Fields must be private with FXML annotations
-    @FXML
-    private Button newGameButton;
-
     @FXML
     private Button howToPlayButton;
 
@@ -26,15 +22,15 @@ public class MenuController {
     private Stage currentStage;
 
     @Inject
-    private StageManager stageManager;
+    private static StageManager stageManager;
 
     public void onNewGameClicked(ActionEvent event) throws IOException {
         Game.run();
     }
 
     public void onHowToPlayClicked(ActionEvent event) throws IOException {
-        currentStage = (Stage)howToPlayButton.getScene().getWindow();
-        stageManager.loadSceneToPrimaryStage(currentStage,Constants.HOW_TO_PLAY_FXML_PATH);
+        this.currentStage = (Stage) this.howToPlayButton.getScene().getWindow();
+        stageManager.loadSceneToPrimaryStage(this.currentStage, Constants.HOW_TO_PLAY_FXML_PATH);
     }
 
     public void onQuitClicked(ActionEvent event) {

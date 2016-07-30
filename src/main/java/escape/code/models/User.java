@@ -1,28 +1,27 @@
 package escape.code.models;
 
-import escape.code.enums.Item;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable{
+
     private String name;
     private String password;
     private Long id;
     private int level;
     private PuzzleRectangle puzzleRectangle;
 
+    public User(){
+    }
+
     @Id
     @GenericGenerator(name="incr" , strategy="increment")
     @GeneratedValue(generator="incr")
     public Long getId() {
-        return id;
-    }
-
-    public User(){
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -30,7 +29,7 @@ public class User implements Serializable{
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -38,7 +37,7 @@ public class User implements Serializable{
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

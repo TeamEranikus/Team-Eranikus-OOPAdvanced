@@ -2,13 +2,13 @@ package escape.code.models;
 
 import escape.code.enums.Item;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "puzzles")
 public class Puzzle implements Serializable {
+
     private Long id;
     private String question;
     private String correctAnswer;
@@ -21,11 +21,10 @@ public class Puzzle implements Serializable {
     private boolean isAnswerGiven;
 
     public Puzzle() {
-
     }
 
     public String getQuestion() {
-        return question;
+        return this.question;
     }
 
     public void setQuestion(String question) {
@@ -33,7 +32,7 @@ public class Puzzle implements Serializable {
     }
 
     public String getNextClue() {
-        return nextClue;
+        return this.nextClue;
     }
 
     public void setNextClue(String nextClue) {
@@ -41,7 +40,7 @@ public class Puzzle implements Serializable {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return this.imagePath;
     }
 
     public void setImagePath(String imagePath) {
@@ -52,7 +51,7 @@ public class Puzzle implements Serializable {
     @GenericGenerator(name="incrementor" , strategy="increment")
     @GeneratedValue(generator="incrementor")
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -60,7 +59,7 @@ public class Puzzle implements Serializable {
     }
 
     public String getHint() {
-        return hint;
+        return this.hint;
     }
 
     public void setHint(String hint) {
@@ -68,7 +67,7 @@ public class Puzzle implements Serializable {
     }
 
     public String getCorrectAnswer() {
-        return correctAnswer;
+        return this.correctAnswer;
     }
 
     public void setCorrectAnswer(String correctAnswer) {
@@ -83,7 +82,7 @@ public class Puzzle implements Serializable {
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     public void setLevel(int level) {
@@ -109,7 +108,7 @@ public class Puzzle implements Serializable {
 
     @Transient
     public boolean isAnswerGiven() {
-        return isAnswerGiven;
+        return this.isAnswerGiven;
     }
 
     public void setAnswerGiven(boolean answerGiven) {

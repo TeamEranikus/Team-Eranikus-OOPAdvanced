@@ -7,6 +7,7 @@ import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
 
 public class UserServiceImpl implements UserService {
+
     private UserDao userDao;
     private PuzzleRectangleService puzzleRectangleService;
 
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
         user.setName(username);
         user.setPassword(password);
         user.setLevel(0);
-        PuzzleRectangle puzzleRectangle = puzzleRectangleService.getFirst();
+        PuzzleRectangle puzzleRectangle = this.puzzleRectangleService.getFirst();
         user.setPuzzleRectangle(puzzleRectangle);
         this.userDao.create(user);
 
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        this.userDao.updateUser(user);
     }
 
     @Override

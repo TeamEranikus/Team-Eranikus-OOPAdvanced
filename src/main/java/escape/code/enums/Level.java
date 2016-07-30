@@ -1,6 +1,5 @@
 package escape.code.enums;
 
-
 import escape.code.utils.Constants;
 
 import java.util.Arrays;

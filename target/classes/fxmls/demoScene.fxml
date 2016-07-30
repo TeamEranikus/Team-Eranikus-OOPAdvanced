@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -13,13 +9,13 @@
    <children>
       <ImageView fx:id="sceneImage" fitHeight="600.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/RoomOneUpView2.png" />
+            <Image url="@../pictures/RoomOne.png" />
          </image>
       </ImageView>
       <ResizableCanvas fx:id="mainCanvas" height="394.0" layoutX="157.0" layoutY="135.0" width="712.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="135.0" />
       <ImageView fx:id="imagePlayer" fitHeight="50.0" fitWidth="70.0" layoutX="480.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/emoticon.png" />
+            <Image url="@../pictures/EmoticonLeft.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="piano" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="61.0" layoutX="100.0" layoutY="463.0" stroke="BLACK" strokeType="INSIDE" width="200.0" visible="false" />
@@ -33,17 +29,17 @@
       <Rectangle fx:id="libraryRectCol" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="738.0" layoutY="154.0" rotate="43.5" stroke="BLACK" strokeType="INSIDE" visible="false" width="114.0" />
       <ImageView fx:id="menuBar" fitHeight="71.0" fitWidth="1024.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/Bar1.png" />
+            <Image url="@../pictures/BarOne.png" />
          </image>
       </ImageView>
       <ImageView fx:id="KEY" fitHeight="61.0" fitWidth="42.0" layoutX="120.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../pictures/one.png" />
+            <Image url="@../pictures/OneCount.png" />
          </image>
       </ImageView>
       <ImageView fx:id="BOOK" fitHeight="61.0" fitWidth="42.0" layoutX="261.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../pictures/one.png" />
+            <Image url="@../pictures/OneCount.png" />
          </image>
       </ImageView>
    </children>

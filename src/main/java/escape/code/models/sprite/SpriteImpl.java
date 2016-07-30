@@ -14,7 +14,6 @@ public class SpriteImpl implements Sprite {
 
     private final Image RIGHT_IMAGE_VIEW = new Image(getClass().getResource(Constants.SPRITE_IMAGE_RIGHT_PATH).toExternalForm());
     private final Image LEFT_IMAGE_VIEW = new Image(getClass().getResource(Constants.SPRITE_IMAGE_LEFT_PATH).toExternalForm());
-
     private ImageView imageView;
     private ResizableCanvas currentCanvas;
 
@@ -27,19 +26,19 @@ public class SpriteImpl implements Sprite {
         return this.imageView;
     }
 
-    public void updateSpriteCoordinates(HashMap<KeyCode, Boolean> keys, ArrayList<Rectangle> rectCollision){
-        if (isPressed(KeyCode.UP,keys)) {
+    public void updateSpriteCoordinates(HashMap<KeyCode, Boolean> keys, ArrayList<Rectangle> rectCollision) {
+        if (this.isPressed(KeyCode.UP, keys)) {
             this.moveY(-2);
-            checkBounds("U", rectCollision);
-        } else if (isPressed(KeyCode.DOWN,keys)) {
+            this.checkBounds("U", rectCollision);
+        } else if (this.isPressed(KeyCode.DOWN, keys)) {
             this.moveY(2);
-            checkBounds("D", rectCollision);
-        } else if (isPressed(KeyCode.RIGHT,keys)) {
+            this.checkBounds("D", rectCollision);
+        } else if (this.isPressed(KeyCode.RIGHT, keys)) {
             this.moveX(2);
-            checkBounds("R", rectCollision);
-        } else if (isPressed(KeyCode.LEFT,keys)) {
+            this.checkBounds("R", rectCollision);
+        } else if (this.isPressed(KeyCode.LEFT, keys)) {
             this.moveX(-2);
-            checkBounds("L", rectCollision);
+            this.checkBounds("L", rectCollision);
         }
     }
 
@@ -51,47 +50,35 @@ public class SpriteImpl implements Sprite {
     }
 
     private void moveX(int x) {
-
         boolean right = x > 0 ? true : false;
         for (int i = 0; i < Math.abs(x); i++) {
             if (right) {
-                double rightBound = currentCanvas.getLayoutX() + currentCanvas.getWidth() - (imageView.getX() + imageView.getFitWidth());
-
+                double rightBound = currentCanvas.getLayoutX() + currentCanvas.getWidth() -
+                        (imageView.getX() + imageView.getFitWidth());
                 imageView.setLayoutX(imageView.getLayoutX() + 1 > rightBound ?
                         rightBound : imageView.getLayoutX() + 1);
-
                 imageView.setImage(RIGHT_IMAGE_VIEW);
-
             } else {
-
                 double leftBound = currentCanvas.getLayoutX();
-
                 imageView.setLayoutX(imageView.getLayoutX() - 1 < leftBound ?
                         leftBound : imageView.getLayoutX() - 1);
-
                 imageView.setImage(LEFT_IMAGE_VIEW);
             }
         }
     }
 
     private void moveY(int y) {
-
         boolean down = y > 0 ? true : false;
         for (int i = 0; i < Math.abs(y); i++) {
             if (down) {
-
-                double downBound = currentCanvas.getLayoutY() + currentCanvas.getHeight() - (imageView.getY() + imageView.getFitHeight());
-
+                double downBound = currentCanvas.getLayoutY() + currentCanvas.getHeight() -
+                        (imageView.getY() + imageView.getFitHeight());
                 imageView.setLayoutY(imageView.getLayoutY() + 1 > downBound ?
                         downBound : imageView.getLayoutY() + 1);
-
             } else {
-
                 double upBound = currentCanvas.getLayoutY();
-
                 imageView.setLayoutY(imageView.getLayoutY() - 1 < upBound ?
                         upBound : imageView.getLayoutY() - 1);
-
             }
         }
     }

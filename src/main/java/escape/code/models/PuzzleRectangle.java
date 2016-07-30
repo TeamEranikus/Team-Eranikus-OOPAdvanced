@@ -1,12 +1,12 @@
 package escape.code.models;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "puzzles_rectangles")
 public class PuzzleRectangle {
+
     private Long id;
     private String name;
     private Puzzle puzzle;
@@ -19,7 +19,7 @@ public class PuzzleRectangle {
     @GenericGenerator(name="incrementor" , strategy="increment")
     @GeneratedValue(generator="incrementor")
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -45,7 +45,7 @@ public class PuzzleRectangle {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "puzzle_id",nullable = false)
     public Puzzle getPuzzle() {
-        return puzzle;
+        return this.puzzle;
     }
 
     public void setPuzzle(Puzzle puzzle) {

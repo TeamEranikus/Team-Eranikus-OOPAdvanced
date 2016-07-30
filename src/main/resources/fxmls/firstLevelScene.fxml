@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
@@ -15,7 +11,7 @@
       <ResizableCanvas fx:id="mainCanvas" height="378.0" layoutX="121.0" layoutY="83.0" rotate="-1.0" width="649.0" />
       <ImageView fx:id="sceneImage" fitHeight="674.0" fitWidth="920.0" layoutX="402.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-148.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../pictures/room_two.png" />
+            <Image url="@../pictures/RoomTwo.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="chess" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="56.0" layoutX="198.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="52.0" visible="false" />
@@ -23,16 +19,16 @@
       <Rectangle fx:id="kitchen" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="17.0" layoutX="539.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="177.0" visible="false"/>
       <ImageView fx:id="imagePlayer" fitHeight="50.0" fitWidth="70.0" layoutX="480.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/emoticon.png" />
+            <Image url="@../pictures/EmoticonLeft.png" />
          </image></ImageView>
       <ImageView fx:id="menuBar" fitHeight="79.0" fitWidth="938.0" layoutX="-1.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/Bar2.png" />
+            <Image url="@../pictures/BarTwo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="KEY" fitHeight="50.0" fitWidth="46.0" layoutX="91.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../pictures/one.png" />
+            <Image url="@../pictures/OneCount.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="coutchRectCol" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff04" height="154.0" layoutX="308.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="46.0" />
@@ -45,7 +41,7 @@
       <Rectangle fx:id="chessRectCol" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="35.0" layoutX="156.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="143.0" />
       <ImageView fx:id="BOOK" fitHeight="50.0" fitWidth="46.0" layoutX="250.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../pictures/one.png" />
+            <Image url="@../pictures/OneCount.png" />
          </image>
       </ImageView>
    </children>

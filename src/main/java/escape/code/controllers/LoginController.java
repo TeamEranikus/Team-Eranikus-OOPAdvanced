@@ -21,7 +21,6 @@ public class LoginController {
     @FXML
     private Label messageLabel;
 
-
     @Inject
     private static UserService userService;
 
@@ -48,13 +47,13 @@ public class LoginController {
             this.checkForEmptyString(username, password);
             userService.createUser(username, password);
             this.login(actionEvent);
-        } catch (IllegalArgumentException ex) {
-            this.messageLabel.setText(ex.getMessage());
+        } catch (IllegalArgumentException exception) {
+            this.messageLabel.setText(exception.getMessage());
         }
     }
 
-    private void checkForEmptyString(String userName, String password) {
-        if (userName.trim().length() == 0) {
+    private void checkForEmptyString(String username, String password) {
+        if (username.trim().length() == 0) {
             throw new IllegalArgumentException("Username cannot be empty!");
         }
 

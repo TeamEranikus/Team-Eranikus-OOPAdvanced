@@ -6,9 +6,8 @@ import escape.code.models.Puzzle;
 import escape.code.models.PuzzleRectangle;
 import escape.code.services.puzzleService.PuzzleService;
 
-import java.util.List;
-
 public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
+
     private PuzzleRectangleDao puzzleRectangleDao;
     private PuzzleService puzzleService;
 
@@ -26,21 +25,15 @@ public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
         Puzzle puzzle = this.puzzleService.getOneById(Long.parseLong(params[2]));
         puzzleRectangle.setPuzzle(puzzle);
         this.puzzleRectangleDao.createPuzzleRectangle(puzzleRectangle);
-
     }
 
     @Override
     public PuzzleRectangle getFirst() {
-        return puzzleRectangleDao.getFirst();
+        return this.puzzleRectangleDao.getFirst();
     }
 
     @Override
     public PuzzleRectangle getOneById(long id) {
-        return puzzleRectangleDao.getOneById(id);
-    }
-
-    @Override
-    public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
-        return null;
+        return this.puzzleRectangleDao.getOneById(id);
     }
 }

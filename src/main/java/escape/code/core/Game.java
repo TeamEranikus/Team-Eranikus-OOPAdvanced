@@ -1,6 +1,8 @@
 package escape.code.core;
 
 import com.google.inject.Inject;
+import escape.code.core.engine.Engine;
+import escape.code.core.engine.EngineImpl;
 import escape.code.enums.Level;
 import escape.code.models.User;
 import escape.code.services.userService.UserService;
@@ -17,6 +19,7 @@ public class Game {
 
     @Inject
     private static StageManager stageManager;
+
     @Inject
     private static UserService userService;
 
@@ -34,8 +37,8 @@ public class Game {
 
     public static void run() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
-        engine = new Engine(fxmlLoader, user, userService, stageManager);
-        playAudioClip();
+        engine = new EngineImpl(fxmlLoader, user, userService, stageManager);
+        playAudio();
         timeline = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -47,7 +50,7 @@ public class Game {
                     //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);
-                    engine = new Engine(fxmlLoader, user, userService, stageManager);
+                    engine = new EngineImpl(fxmlLoader, user, userService, stageManager);
                     mediaPlayer.play();
                 } catch (NullPointerException ex) {
                     ex.printStackTrace();
@@ -70,8 +73,7 @@ public class Game {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Constants.LOGIN_FXML_PATH);
     }
 
-    private static void playAudioClip() {
-
+    private static void playAudio() {
         File file = new File(Constants.SOUNDS_PATH);
         String MEDIA_URL = file.toURI().toString();
         Media media = new Media(MEDIA_URL);

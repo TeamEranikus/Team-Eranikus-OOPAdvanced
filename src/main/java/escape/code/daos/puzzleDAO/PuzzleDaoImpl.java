@@ -2,12 +2,10 @@ package escape.code.daos.puzzleDAO;
 
 import com.google.inject.Inject;
 import escape.code.models.Puzzle;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PuzzleDaoImpl implements PuzzleDao {
-
 
     @Inject
     private EntityManager entityManager;

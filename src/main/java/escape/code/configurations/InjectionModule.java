@@ -3,8 +3,10 @@ package escape.code.configurations;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import escape.code.controllers.HowToPlayController;
 import escape.code.controllers.LoginController;
-import escape.code.core.Engine;
+import escape.code.controllers.MenuController;
+import escape.code.core.engine.EngineImpl;
 import escape.code.core.Game;
 import escape.code.core.StageManager;
 import escape.code.daos.puzzleDAO.PuzzleDao;
@@ -39,14 +41,10 @@ public class InjectionModule extends AbstractModule {
         bind(PuzzleRectangleService.class).to(PuzzleRectangleServiceImpl.class);
 
         requestStaticInjection(LoginController.class);
-        requestStaticInjection(Engine.class);
+        requestStaticInjection(EngineImpl.class);
         requestStaticInjection(Game.class);
-    }
-
-    @Provides
-    @Singleton
-    private EntityManagerFactory provideEntityManagerFactory() {
-        return Persistence.createEntityManagerFactory("escape_code");
+        requestStaticInjection(HowToPlayController.class);
+        requestStaticInjection(MenuController.class);
     }
 
     @Provides
@@ -66,5 +64,11 @@ public class InjectionModule extends AbstractModule {
             STAGE_MANAGER_CACHE.set(stageManager = new StageManager());
         }
         return stageManager;
+    }
+
+    @Provides
+    @Singleton
+    private EntityManagerFactory provideEntityManagerFactory() {
+        return Persistence.createEntityManagerFactory("escape_code");
     }
 }

@@ -2,7 +2,6 @@ package escape.code.daos.puzzleRectangleDAO;
 
 import com.google.inject.Inject;
 import escape.code.models.PuzzleRectangle;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 

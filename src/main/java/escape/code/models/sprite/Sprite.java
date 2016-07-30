@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface Sprite {
+
     void updateSpriteCoordinates(HashMap<KeyCode, Boolean> keys, ArrayList<Rectangle> rectCollision);
+
     boolean checkForCol(Rectangle current);
+
     ImageView getImageView();
 }
