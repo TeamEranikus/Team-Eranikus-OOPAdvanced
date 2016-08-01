@@ -109,10 +109,9 @@ public class EngineImpl implements Engine {
                 PuzzleController.setPuzzle(currentPuzzle);
             }
             stageManager.loadSceneToPrimaryStage(new Stage(), Constants.PUZZLE_FXML_PATH);
-        }else if (currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)){
+        } else if (currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)) {
             this.userService.updateUser(user);
-            //TODO here is the end of the game
-            System.exit(0);
+            stageManager.loadSceneToPrimaryStage(this.currentLoadedStage, Constants.GAME_FINISHED_FXML_PATH);
         } else {
             this.currentLoadedStage.close();
             PuzzleRectangle puzzle = user.getPuzzleRectangle();

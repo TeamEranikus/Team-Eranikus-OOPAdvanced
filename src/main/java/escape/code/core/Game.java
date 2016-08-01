@@ -16,7 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class Game {
-
+    private static final int LEVEL_INCREMENTER = 1;
+    private static final int NUMBER_OF_LEVELS = Level.values().length;
     @Inject
     private static StageManager stageManager;
 
@@ -46,7 +47,7 @@ public class Game {
                     engine.play();
                 } catch (IllegalStateException e) {
                     mediaPlayer.stop();
-                    user.setLevel((user.getLevel() + 1) % 3);
+                    user.setLevel((user.getLevel() + LEVEL_INCREMENTER) % NUMBER_OF_LEVELS);
                     //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);

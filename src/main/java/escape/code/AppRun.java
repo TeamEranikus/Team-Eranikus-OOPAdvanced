@@ -4,12 +4,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import escape.code.configurations.InjectionModule;
 import escape.code.core.Game;
-import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
-import escape.code.services.puzzleService.PuzzleService;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
 
 
 public class AppRun extends Application {
@@ -17,7 +13,7 @@ public class AppRun extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        //Todo: when you first build the program change hibernateUnils line 55 form update to create, then comment from here
+//        //Todo: when you first build the program change hibernateUnils line 55 form update to create, then comment from here
 //        String[][] taskParams = {
 //                {"-What the following code will print?", "piano", "Do you really need the numbers?", "What could it be??", "/pictures/ComputerTaskWhite.png", "0", "NONE"},
 //                {"-One piano button is stuck!", "13", "How will you EXit?", "You are one step away from the exit.", "/pictures/PianoTask.jpg", "0", "BOOK"},

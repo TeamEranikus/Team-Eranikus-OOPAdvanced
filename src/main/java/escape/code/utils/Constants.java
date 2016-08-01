@@ -12,6 +12,7 @@ public class Constants {
     public static final String PUZZLE_FXML_PATH = "/fxmls/puzzlesScene.fxml";
     public static final String FIRST_LEVEL_FXML_PATH = "/fxmls/firstLevelScene.fxml";
     public static final String SECOND_LEVEL_FXML_PATH = "/fxmls/secondLevelScene.fxml";
+    public static final String GAME_FINISHED_FXML_PATH = "/fxmls/gameFinishedScene.fxml";
     public static final String SOUNDS_PATH = "target/classes/sounds/snd_music_next.mp3";
     public static double FULL_HD_WIDTH = 1920.0D;
     public static double FULL_HD_HIGH = 1080.0D;
