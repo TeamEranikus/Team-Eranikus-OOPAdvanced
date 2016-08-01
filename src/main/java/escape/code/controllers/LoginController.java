@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * Controls the fxml file for the login scene
+ */
 public class LoginController {
 
     @FXML
@@ -26,6 +29,10 @@ public class LoginController {
 
     private User user;
 
+    /**
+     * Logged in the current user by given username and password
+     * @param actionEvent
+     */
     public void login(ActionEvent actionEvent) {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
@@ -39,7 +46,10 @@ public class LoginController {
         }
     }
 
-
+    /**
+     * Register the new user by given username and password
+     * @param actionEvent
+     */
     public void register(ActionEvent actionEvent) {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
@@ -52,6 +62,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * Validates user input
+     * @param username - tipped username
+     * @param password - tipped password
+     * @throws IllegalArgumentException when tipped input is empty or white space
+     */
     private void checkForEmptyString(String username, String password) {
         if (username.trim().length() == 0) {
             throw new IllegalArgumentException("Username cannot be empty!");

@@ -6,6 +6,9 @@ import escape.code.models.PuzzleRectangle;
 import escape.code.models.User;
 import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
 
+/**
+ * Keeps logic for user database and user DAO communication
+ */
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
@@ -26,7 +29,6 @@ public class UserServiceImpl implements UserService {
         PuzzleRectangle puzzleRectangle = this.puzzleRectangleService.getFirst();
         user.setPuzzleRectangle(puzzleRectangle);
         this.userDao.create(user);
-
     }
 
     @Override

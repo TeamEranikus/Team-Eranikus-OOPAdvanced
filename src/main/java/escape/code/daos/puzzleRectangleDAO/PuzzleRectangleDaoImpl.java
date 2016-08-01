@@ -5,11 +5,18 @@ import escape.code.models.PuzzleRectangle;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * Data access object responsible for connection with puzzle rectangle database
+ */
 public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
 
     @Inject
     private EntityManager entityManager;
 
+    /**
+     * Creates puzzle rectangles for current level
+     * @param currentRectangle
+     */
     @Override
     public void createPuzzleRectangle(PuzzleRectangle currentRectangle) {
         this.entityManager.getTransaction().begin();
@@ -17,6 +24,10 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
         this.entityManager.getTransaction().commit();
     }
 
+    /**
+     * Gets first puzzle rectangle
+     * @return
+     */
     @Override
     @SuppressWarnings("unchecked")
     public PuzzleRectangle getFirst() {
@@ -26,6 +37,11 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
         return rectangles.get(0);
     }
 
+    /**
+     * Gets all puzzle rectangles for current level
+     * @param level - current level
+     * @return all puzzle rectangles for current level
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
@@ -35,6 +51,11 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
         return rectangles;
     }
 
+    /**
+     * Gets puzzle rectangle by given id
+     * @param id - puzzle rectangle id
+     * @return - corresponding puzzle rectangle
+     */
     @Override
     @SuppressWarnings("unchecked")
     public PuzzleRectangle getOneById(long id) {

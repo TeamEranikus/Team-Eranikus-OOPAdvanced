@@ -5,6 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Sets up puzzle database
+ */
 @Entity
 @Table(name = "puzzles")
 public class Puzzle implements Serializable {

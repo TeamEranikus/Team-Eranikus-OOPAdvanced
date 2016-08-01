@@ -5,11 +5,19 @@ import escape.code.models.Puzzle;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * Data access object responsible for connection with puzzle database
+ */
 public class PuzzleDaoImpl implements PuzzleDao {
 
     @Inject
     private EntityManager entityManager;
 
+    /**
+     * Gets all puzzles in current level
+     * @param level - current game level
+     * @return - current level puzzle list
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Puzzle> getAllByLevel(int level) {
@@ -19,6 +27,10 @@ public class PuzzleDaoImpl implements PuzzleDao {
                 .getResultList();
     }
 
+    /**
+     * Creates current puzzle
+     * @param puzzle
+     */
     @Override
     public void createPuzzle(Puzzle puzzle) {
         this.entityManager.getTransaction().begin();
@@ -26,6 +38,11 @@ public class PuzzleDaoImpl implements PuzzleDao {
         this.entityManager.getTransaction().commit();
     }
 
+    /**
+     * Gets puzzle from database by given id
+     * @param id - current puzzle id
+     * @return - corresponding puzzle
+     */
     @Override
     @SuppressWarnings("unchecked")
     public Puzzle getOneById(long id) {

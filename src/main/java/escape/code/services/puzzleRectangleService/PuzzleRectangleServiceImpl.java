@@ -6,6 +6,9 @@ import escape.code.models.Puzzle;
 import escape.code.models.PuzzleRectangle;
 import escape.code.services.puzzleService.PuzzleService;
 
+/**
+ * Keeps logic for puzzle rectangle database and puzzle rectangle DAO communication
+ */
 public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
 
     private PuzzleRectangleDao puzzleRectangleDao;

@@ -6,6 +6,9 @@ import escape.code.enums.Item;
 import escape.code.models.Puzzle;
 import java.util.List;
 
+/**
+ * Keeps logic for puzzle database and puzzle DAO communication
+ */
 public class PuzzleServiceImpl implements PuzzleService {
 
     private PuzzleDao puzzleDao;

@@ -1,5 +1,8 @@
 package escape.code.utils;
 
+/**
+ * Game constants
+ */
 public class Constants {
 
     public static final String SPRITE_IMAGE_LEFT_PATH = "/pictures/EmoticonLeft.png";

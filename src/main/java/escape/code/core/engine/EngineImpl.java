@@ -26,6 +26,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Keeps the logic for the running level scene
+ * Run by Game class
+ */
 public class EngineImpl implements Engine {
 
     private static final int PUZZLE_INCREMENTER = 1;
@@ -52,6 +56,13 @@ public class EngineImpl implements Engine {
     private FXMLLoader loader;
     private User user;
 
+    /**
+     * Set up the current scene engine
+     * @param loader - scene fxml loader
+     * @param user - current logged in user
+     * @param userService - service responsible for connection with user database
+     * @param stageManager - manager for the current stage
+     */
     public EngineImpl(FXMLLoader loader, User user, UserService userService, StageManager stageManager) {
         this.userService = userService;
         this.loader = loader;
@@ -61,7 +72,10 @@ public class EngineImpl implements Engine {
         this.initialize();
     }
 
-
+    /**
+     * Set up current scene game play
+     * @throws IllegalStateException
+     */
     public void play() throws IllegalStateException {
         this.sprite.updateSpriteCoordinates(this.keys, this.rectCollision);
         boolean hasCollision = this.sprite.checkForCol(this.currentPuzzleRectangle);
@@ -131,6 +145,10 @@ public class EngineImpl implements Engine {
 
     }
 
+    /**
+     * Gets current collision rectangle
+     * @return collision rectangle for the current puzzle
+     */
     private Rectangle getCurrentPuzzleRectangle() {
         PuzzleRectangle puzzleRectangle = user.getPuzzleRectangle();
         Rectangle current = (Rectangle) this.objectsInCurrentScene.get(puzzleRectangle.getName());

@@ -4,6 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Sets up user database
+ */
 @Entity
 @Table(name = "users")
 public class User implements Serializable{

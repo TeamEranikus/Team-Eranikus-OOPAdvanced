@@ -7,9 +7,17 @@ import escape.code.core.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
 
+/**
+ * Game entry class
+ */
 public class AppRun extends Application {
 
+    /**
+     * Escape code start point
+     * @param primaryStage main stage for the game
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -54,6 +62,10 @@ public class AppRun extends Application {
 
     }
 
+    /**
+     * Main entry point
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

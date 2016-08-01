@@ -3,6 +3,9 @@ package escape.code.models;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
+/**
+ * Sets up puzzles rectangles database
+ */
 @Entity
 @Table(name = "puzzles_rectangles")
 public class PuzzleRectangle {

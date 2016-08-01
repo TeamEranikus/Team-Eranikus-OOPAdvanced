@@ -26,12 +26,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+/**
+ * Injects game dependencies by binding interfaces to corresponding implementations
+ */
 public class InjectionModule extends AbstractModule {
 
     private static final ThreadLocal<EntityManager> ENTITY_MANAGER_CACHE = new ThreadLocal<>();
     private static final ThreadLocal<StageManager> STAGE_MANAGER_CACHE = new ThreadLocal<>();
 
+    /**
+     * Binds interfaces tho corresponding implementations
+     */
     public void configure() {
         bind(UserDao.class).to(UserDaoImpl.class);
         bind(PuzzleDao.class).to(PuzzleDaoImpl.class);
@@ -47,6 +52,11 @@ public class InjectionModule extends AbstractModule {
         requestStaticInjection(MenuController.class);
     }
 
+    /**
+     * Provides entity manager by given entity manager factory, singleton implementation
+     * @param entityManagerFactory - creates entity manager
+     * @return created entity manager
+     */
     @Provides
     public EntityManager provideEntityManager(EntityManagerFactory entityManagerFactory) {
         EntityManager entityManager = ENTITY_MANAGER_CACHE.get();
@@ -56,6 +66,10 @@ public class InjectionModule extends AbstractModule {
         return entityManager;
     }
 
+    /**
+     * Provides stage manager, singleton implementation
+     * @return created stage manager
+     */
     @Provides
     @Singleton
     public StageManager provideStageManager() {
@@ -66,6 +80,10 @@ public class InjectionModule extends AbstractModule {
         return stageManager;
     }
 
+    /**
+     * Provides entity manager factory, used to create the entity manager
+     * @return created entity manager factory
+     */
     @Provides
     @Singleton
     private EntityManagerFactory provideEntityManagerFactory() {

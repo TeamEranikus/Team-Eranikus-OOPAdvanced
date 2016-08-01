@@ -1,5 +1,8 @@
 package escape.code.enums;
 
+/**
+ * Item types in the game
+ */
 public enum Item {
     KEY(true),
     BOOK(true),
@@ -7,10 +10,18 @@ public enum Item {
 
     private boolean hasItem;
 
+    /**
+     * Sets item capacity status
+     * @param hasItem
+     */
     Item(boolean hasItem){
         this.hasItem = hasItem;
     }
 
+    /**
+     * Gets item capacity status
+     * @return true if the player has corresponding item or false if hasn't
+     */
     public boolean hasItem(){
         return this.hasItem;
     }

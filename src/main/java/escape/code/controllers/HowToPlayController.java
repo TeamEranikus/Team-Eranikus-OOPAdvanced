@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controls fxml file for the how to play scene
+ */
 public class HowToPlayController {
 
     @FXML
@@ -19,6 +22,11 @@ public class HowToPlayController {
     @Inject
     private static StageManager stageManager;
 
+    /**
+     * Returns the scene to the main menu
+     * @param event
+     * @throws IOException
+     */
     public void backToMenu(ActionEvent event) throws IOException {
         this.currentStage = (Stage) this.backToGame.getScene().getWindow();
         stageManager.loadSceneToPrimaryStage(this.currentStage, Constants.MENU_FXML_PATH);

@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Keeps the main logic for running the game
+ */
 public class Game {
     private static final int LEVEL_INCREMENTER = 1;
     private static final int NUMBER_OF_LEVELS = Level.values().length;
@@ -31,11 +34,21 @@ public class Game {
     private static Stage currentStage;
     private static MediaPlayer mediaPlayer;
 
+    /**
+     * Initialize current stage
+     * @param stage - stage to be initialized
+     */
      public static void initialize(Stage stage){
          currentStage = stage;
          login();
      }
 
+    /**
+     * Runs the game:
+     * Initialize engine for current stage
+     * Runs audio
+     * Set up animation timer
+     */
     public static void run() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
         engine = new EngineImpl(fxmlLoader, user, userService, stageManager);
@@ -62,18 +75,31 @@ public class Game {
         timeline.start();
     }
 
+    /**
+     * Set current logged in user
+     * @param currentUser - current logged in user
+     */
     public static void setUser(User currentUser) {
         user = currentUser;
     }
 
+    /**
+     * Loads game menu stage
+     */
     public static void loadMainMenu() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Constants.MENU_FXML_PATH);
     }
 
+    /**
+     * Loads game login stage
+     */
     private static void login() {
         fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Constants.LOGIN_FXML_PATH);
     }
 
+    /**
+     * Plays game audio file
+     */
     private static void playAudio() {
         File file = new File(Constants.SOUNDS_PATH);
         String MEDIA_URL = file.toURI().toString();

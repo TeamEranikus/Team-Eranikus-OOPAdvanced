@@ -10,6 +10,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Keeps logic for player game object
+ */
 public class SpriteImpl implements Sprite {
 
     private final Image RIGHT_IMAGE_VIEW = new Image(getClass().getResource(Constants.SPRITE_IMAGE_RIGHT_PATH).toExternalForm());
@@ -17,15 +20,29 @@ public class SpriteImpl implements Sprite {
     private ImageView imageView;
     private ResizableCanvas currentCanvas;
 
+    /**
+     * Sets up sprite image and canvas
+     * @param image - player sprite image
+     * @param canvas - player sprite canvas
+     */
     public SpriteImpl(ImageView image, ResizableCanvas canvas) {
         this.imageView = image;
         this.currentCanvas = canvas;
     }
 
+    /**
+     * Gets sprite image view
+     * @return - image view
+     */
     public ImageView getImageView() {
         return this.imageView;
     }
 
+    /**
+     * Update sprite coordinates by movement
+     * @param keys - pressed keys
+     * @param rectCollision - level rectangle collisions
+     */
     public void updateSpriteCoordinates(HashMap<KeyCode, Boolean> keys, ArrayList<Rectangle> rectCollision) {
         if (this.isPressed(KeyCode.UP, keys)) {
             this.moveY(-2);
@@ -42,6 +59,11 @@ public class SpriteImpl implements Sprite {
         }
     }
 
+    /**
+     * Checks for puzzle collision with detected rectangle
+     * @param current - current rectangle
+     * @return - if collision is detected
+     */
     public boolean checkForCol(Rectangle current) {
         if (current.isDisabled()) {
             return false;
@@ -49,6 +71,10 @@ public class SpriteImpl implements Sprite {
         return current.getBoundsInParent().intersects(this.getImageView().getBoundsInParent());
     }
 
+    /**
+     * Moves sprite right or left and sets current sprite to the corresponding one (right or left)
+     * @param x - moved direction: right if is more than zero or left if is less
+     */
     private void moveX(int x) {
         boolean right = x > 0 ? true : false;
         for (int i = 0; i < Math.abs(x); i++) {
@@ -67,6 +93,10 @@ public class SpriteImpl implements Sprite {
         }
     }
 
+    /**
+     * Moves sprite up or down
+     * @param y - moved direction: down if is more than zero or up if is less
+     */
     private void moveY(int y) {
         boolean down = y > 0 ? true : false;
         for (int i = 0; i < Math.abs(y); i++) {
@@ -83,10 +113,16 @@ public class SpriteImpl implements Sprite {
         }
     }
 
+    /**
+     * Check if key was pressed
+     */
     private boolean isPressed(KeyCode key, HashMap<KeyCode, Boolean> keys) {
         return keys.getOrDefault(key, false);
     }
 
+    /**
+     * Check sprite position with level collision rectangles
+     */
     private void checkBounds(String direction, ArrayList<Rectangle> rectCollision) {
         for (Rectangle rectangle : rectCollision) {
             if (checkForCol(rectangle)) {

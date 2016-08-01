@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controls fxml file for the game main manu scene
+ */
 public class MenuController {
 
     @FXML
@@ -24,15 +27,24 @@ public class MenuController {
     @Inject
     private static StageManager stageManager;
 
+    /**
+     * Sets up current game level scene
+     */
     public void onNewGameClicked(ActionEvent event) throws IOException {
         Game.run();
     }
 
+    /**
+     * Sets up how to play scene
+     */
     public void onHowToPlayClicked(ActionEvent event) throws IOException {
         this.currentStage = (Stage) this.howToPlayButton.getScene().getWindow();
         stageManager.loadSceneToPrimaryStage(this.currentStage, Constants.HOW_TO_PLAY_FXML_PATH);
     }
 
+    /**
+     * Exits the game
+     */
     public void onQuitClicked(ActionEvent event) {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();

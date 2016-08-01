@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controls fxml file for current puzzle
+ */
 public class PuzzleController implements Initializable {
 
     @FXML
@@ -38,10 +41,17 @@ public class PuzzleController implements Initializable {
 
     private static Puzzle puzzle;
 
+    /**
+     * Sets executing puzzle
+     * @param puzzleToSet current puzzle
+     */
     public static void setPuzzle(Puzzle puzzleToSet) {
         puzzle = puzzleToSet;
     }
 
+    /**
+     * Initialize current puzzle params
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.puzzleImage.setImage(new Image(puzzle.getImagePath()));
@@ -51,13 +61,20 @@ public class PuzzleController implements Initializable {
         this.nextClue.setText("Incorrect answer!");
     }
 
+    /**
+     * Sets puzzle hint to visible
+     * @param actionEvent
+     */
     public void giveHint(ActionEvent actionEvent) {
         if (actionEvent.getSource() == hintButton) {
             this.hintText.setVisible(true);
         }
     }
 
-
+    /**
+     * Checks the given answer and sets next puzzle clue to visible if answer is correct
+     * @param actionEvent
+     */
     public void checkAnswer(ActionEvent actionEvent) {
         String userAnswerString = this.userAnswer.getText().toLowerCase().trim();
         if (puzzle.checkCorrectAnswer(userAnswerString)) {
@@ -70,6 +87,9 @@ public class PuzzleController implements Initializable {
         }
     }
 
+    /**
+     * Centers current puzzle image
+     */
     private void centerImage() {
         Image image = puzzleImage.getImage();
 
