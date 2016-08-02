@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Controls fxml file for the game main manu scene
+ * Controls fxml file for the game main menu scene
  */
 public class MenuController {
 
@@ -48,6 +48,5 @@ public class MenuController {
     public void onQuitClicked(ActionEvent event) {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
-        // should call confirm box? "Are you sure?"
     }
 }

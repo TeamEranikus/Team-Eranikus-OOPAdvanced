@@ -51,8 +51,8 @@ public class Puzzle implements Serializable {
     }
 
     @Id
-    @GenericGenerator(name="incrementor" , strategy="increment")
-    @GeneratedValue(generator="incrementor")
+    @GenericGenerator(name="incrementer" , strategy="increment")
+    @GeneratedValue(generator="incrementer")
     public Long getId() {
         return this.id;
     }

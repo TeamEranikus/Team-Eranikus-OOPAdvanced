@@ -10,6 +10,9 @@ import escape.code.services.puzzleService.PuzzleService;
  * Keeps logic for puzzle rectangle database and puzzle rectangle DAO communication
  */
 public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
+    private static final int PUZZLE_RECTANGLE_NAME_INDEX = 0;
+    private static final int PUZZLE_RECTANGLE_LEVEL_INDEX = 1;
+    private static final int PUZZLE_RECTANGLE_CORESPONDING_PUZZLE_INDEX = 2;
 
     private PuzzleRectangleDao puzzleRectangleDao;
     private PuzzleService puzzleService;
@@ -23,9 +26,9 @@ public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
     @Override
     public void createPuzzleRectangle(String... params) {
         PuzzleRectangle puzzleRectangle = new PuzzleRectangle();
-        puzzleRectangle.setName(params[0]);
-        puzzleRectangle.setLevel(Integer.parseInt(params[1]));
-        Puzzle puzzle = this.puzzleService.getOneById(Long.parseLong(params[2]));
+        puzzleRectangle.setName(params[PUZZLE_RECTANGLE_NAME_INDEX]);
+        puzzleRectangle.setLevel(Integer.parseInt(params[PUZZLE_RECTANGLE_LEVEL_INDEX]));
+        Puzzle puzzle = this.puzzleService.getOneById(Long.parseLong(params[PUZZLE_RECTANGLE_CORESPONDING_PUZZLE_INDEX]));
         puzzleRectangle.setPuzzle(puzzle);
         this.puzzleRectangleDao.createPuzzleRectangle(puzzleRectangle);
     }

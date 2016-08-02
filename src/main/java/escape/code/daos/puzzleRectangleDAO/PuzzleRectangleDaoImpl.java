@@ -32,7 +32,7 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
     @SuppressWarnings("unchecked")
     public PuzzleRectangle getFirst() {
         List<PuzzleRectangle> rectangles = this.entityManager
-                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id")
+                .createQuery("SELECT rectangle FROM PuzzleRectangle AS rectangle WHERE rectangle.id=:id")
                 .setParameter("id",1L).getResultList();
         return rectangles.get(0);
     }
@@ -46,7 +46,7 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
     @SuppressWarnings("unchecked")
     public List<PuzzleRectangle> getAllPuzzleRectangleByLevel(int level) {
         List<PuzzleRectangle> rectangles = this.entityManager
-                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.level like :level")
+                .createQuery("SELECT rectangle FROM PuzzleRectangle AS rectangle WHERE rectangle.level=:level")
                 .setParameter("level", level).getResultList();
         return rectangles;
     }
@@ -60,7 +60,7 @@ public class PuzzleRectangleDaoImpl implements PuzzleRectangleDao {
     @SuppressWarnings("unchecked")
     public PuzzleRectangle getOneById(long id) {
         List<PuzzleRectangle> rectangles = this.entityManager
-                .createQuery("SELECT rect FROM PuzzleRectangle AS rect where rect.id=:id")
+                .createQuery("SELECT rectangle FROM PuzzleRectangle AS rectangle WHERE rectangle.id=:id")
                 .setParameter("id", id).getResultList();
         return rectangles.get(0);
     }

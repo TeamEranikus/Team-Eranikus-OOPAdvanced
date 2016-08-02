@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao{
      */
     @SuppressWarnings("unchecked")
     private User getUserByName(String userName) {
-        Query query = this.entityManager.createQuery("select user from User as user where user.name = :name");
+        Query query = this.entityManager.createQuery("SELECT user FROM User AS user WHERE user.name=:name");
         query.setParameter("name", userName);
         List<User> users = query.getResultList();
         if (users.size() == 0){

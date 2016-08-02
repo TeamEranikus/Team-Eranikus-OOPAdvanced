@@ -12,13 +12,12 @@ public class ResizableCanvas extends Canvas {
      * Adds width and height property event listeners
      */
     public ResizableCanvas() {
-        // Redraw canvas when size changes.
         widthProperty().addListener(evt -> draw());
         heightProperty().addListener(evt -> draw());
     }
 
     /**
-     * Resize the canvas when width or height property get changed
+     * Redraw the canvas when width or height property get changed
      */
     private void draw() {
         double width = getWidth();

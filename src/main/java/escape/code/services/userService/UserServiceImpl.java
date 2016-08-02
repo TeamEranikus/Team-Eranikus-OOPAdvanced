@@ -10,6 +10,7 @@ import escape.code.services.puzzleRectangleService.PuzzleRectangleService;
  * Keeps logic for user database and user DAO communication
  */
 public class UserServiceImpl implements UserService {
+    private static final int DEFAULT_START_LEVEL = 0;
 
     private UserDao userDao;
     private PuzzleRectangleService puzzleRectangleService;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(username);
         user.setPassword(password);
-        user.setLevel(0);
+        user.setLevel(DEFAULT_START_LEVEL);
         PuzzleRectangle puzzleRectangle = this.puzzleRectangleService.getFirst();
         user.setPuzzleRectangle(puzzleRectangle);
         this.userDao.create(user);

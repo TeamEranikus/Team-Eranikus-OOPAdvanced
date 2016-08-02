@@ -22,7 +22,7 @@ public class PuzzleDaoImpl implements PuzzleDao {
     @SuppressWarnings("unchecked")
     public List<Puzzle> getAllByLevel(int level) {
       return this.entityManager
-                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.level like :level")
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle WHERE puzzle.level=:level")
                 .setParameter("level",level)
                 .getResultList();
     }
@@ -47,7 +47,7 @@ public class PuzzleDaoImpl implements PuzzleDao {
     @SuppressWarnings("unchecked")
     public Puzzle getOneById(long id) {
         List<Puzzle> allPuzzle = this.entityManager
-                .createQuery("SELECT puzzle FROM Puzzle AS puzzle where puzzle.id like :id")
+                .createQuery("SELECT puzzle FROM Puzzle AS puzzle WHERE puzzle.id=:id")
                 .setParameter("id",id)
                 .getResultList();
         return allPuzzle.get(0);

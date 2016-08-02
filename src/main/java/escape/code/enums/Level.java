@@ -42,6 +42,9 @@ public enum Level {
      * @return - corresponding level
      */
     public static Level getByNum(int num){
-      return Arrays.stream(Level.values()).filter(level -> level.getNum() == num).findFirst().get();
+      return Arrays.stream(Level.values())
+              .filter(level -> level.getNum() == num)
+              .findFirst()
+              .orElse(null);
     }
 }

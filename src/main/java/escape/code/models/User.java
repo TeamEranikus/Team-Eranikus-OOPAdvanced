@@ -21,8 +21,8 @@ public class User implements Serializable{
     }
 
     @Id
-    @GenericGenerator(name="incr" , strategy="increment")
-    @GeneratedValue(generator="incr")
+    @GenericGenerator(name="incrementer" , strategy="increment")
+    @GeneratedValue(generator="incrementer")
     public Long getId() {
         return this.id;
     }

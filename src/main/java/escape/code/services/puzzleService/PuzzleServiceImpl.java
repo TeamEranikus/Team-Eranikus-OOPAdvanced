@@ -10,6 +10,13 @@ import java.util.List;
  * Keeps logic for puzzle database and puzzle DAO communication
  */
 public class PuzzleServiceImpl implements PuzzleService {
+    private static final int PUZZLE_QUESTION_INDEX = 0;
+    private static final int PUZZLE_CORRECT_ANSWER_INDEX = 1;
+    private static final int PUZZLE_HINT_INDEX = 2;
+    private static final int PUZZLE_NEXT_CLUE_INDEX = 3;
+    private static final int PUZZLE_IMAGE_PATH_INDEX = 4;
+    private static final int PUZZLE_CORRESPONDING_LEVEL_INDEX = 5;
+    private static final int PUZZLE_CORRESPONDING_ITEM_INDEX = 6;
 
     private PuzzleDao puzzleDao;
 
@@ -21,13 +28,13 @@ public class PuzzleServiceImpl implements PuzzleService {
     @Override
     public void createPuzzle(String... params) {
         Puzzle puzzle = new Puzzle();
-        puzzle.setQuestion(params[0]);
-        puzzle.setCorrectAnswer(params[1]);
-        puzzle.setHint(params[2]);
-        puzzle.setNextClue(params[3]);
-        puzzle.setImagePath(params[4]);
-        puzzle.setLevel(Integer.parseInt(params[5]));
-        puzzle.setItem(Item.valueOf(params[6].toUpperCase()));
+        puzzle.setQuestion(params[PUZZLE_QUESTION_INDEX]);
+        puzzle.setCorrectAnswer(params[PUZZLE_CORRECT_ANSWER_INDEX]);
+        puzzle.setHint(params[PUZZLE_HINT_INDEX]);
+        puzzle.setNextClue(params[PUZZLE_NEXT_CLUE_INDEX]);
+        puzzle.setImagePath(params[PUZZLE_IMAGE_PATH_INDEX]);
+        puzzle.setLevel(Integer.parseInt(params[PUZZLE_CORRESPONDING_LEVEL_INDEX]));
+        puzzle.setItem(Item.valueOf(params[PUZZLE_CORRESPONDING_ITEM_INDEX].toUpperCase()));
         this.puzzleDao.createPuzzle(puzzle);
     }
 

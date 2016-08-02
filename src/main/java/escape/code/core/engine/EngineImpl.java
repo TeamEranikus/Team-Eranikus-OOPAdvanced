@@ -157,7 +157,7 @@ public class EngineImpl implements Engine {
     }
 
     private void setItem(Item currentItem) {
-        if (!currentItem.name().equals("NONE")) {
+        if (!currentItem.name().equals(Item.NONE.name())) {
             Node node = (Node) this.objectsInCurrentScene.get(currentItem.name());
             node.setVisible(currentItem.hasItem());
         }

@@ -43,6 +43,7 @@ public class PuzzleController implements Initializable {
 
     /**
      * Sets executing puzzle
+     *
      * @param puzzleToSet current puzzle
      */
     public static void setPuzzle(Puzzle puzzleToSet) {
@@ -63,6 +64,7 @@ public class PuzzleController implements Initializable {
 
     /**
      * Sets puzzle hint to visible
+     *
      * @param actionEvent
      */
     public void giveHint(ActionEvent actionEvent) {
@@ -73,6 +75,7 @@ public class PuzzleController implements Initializable {
 
     /**
      * Checks the given answer and sets next puzzle clue to visible if answer is correct
+     *
      * @param actionEvent
      */
     public void checkAnswer(ActionEvent actionEvent) {

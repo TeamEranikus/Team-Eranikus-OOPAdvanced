@@ -61,7 +61,6 @@ public class Game {
                 } catch (IllegalStateException e) {
                     mediaPlayer.stop();
                     user.setLevel((user.getLevel() + LEVEL_INCREMENTER) % NUMBER_OF_LEVELS);
-                    //TODO pop - up to ask do you want to continue
                     fxmlLoader = stageManager.loadSceneToPrimaryStage(currentStage, Level.getByNum(user.getLevel()).getPath());
                     userService.updateUser(user);
                     engine = new EngineImpl(fxmlLoader, user, userService, stageManager);
@@ -102,8 +101,8 @@ public class Game {
      */
     private static void playAudio() {
         File file = new File(Constants.SOUNDS_PATH);
-        String MEDIA_URL = file.toURI().toString();
-        Media media = new Media(MEDIA_URL);
+        String mediaUrl = file.toURI().toString();
+        Media media = new Media(mediaUrl);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     }
