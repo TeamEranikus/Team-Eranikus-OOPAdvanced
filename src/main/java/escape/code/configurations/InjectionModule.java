@@ -57,7 +57,9 @@ public class InjectionModule extends AbstractModule {
      * @param entityManagerFactory - creates entity manager
      * @return created entity manager
      */
+
     @Provides
+    @Singleton
     public EntityManager provideEntityManager(EntityManagerFactory entityManagerFactory) {
         EntityManager entityManager = ENTITY_MANAGER_CACHE.get();
         if (entityManager == null) {

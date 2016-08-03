@@ -79,16 +79,16 @@ public class SpriteImpl implements Sprite {
         boolean right = x > 0 ? true : false;
         for (int i = 0; i < Math.abs(x); i++) {
             if (right) {
-                double rightBound = currentCanvas.getLayoutX() + currentCanvas.getWidth() -
-                        (imageView.getX() + imageView.getFitWidth());
-                imageView.setLayoutX(imageView.getLayoutX() + 1 > rightBound ?
-                        rightBound : imageView.getLayoutX() + 1);
-                imageView.setImage(RIGHT_IMAGE_VIEW);
+                double rightBound = this.currentCanvas.getLayoutX() + this.currentCanvas.getWidth() -
+                        (this.imageView.getX() + this.imageView.getFitWidth());
+                this.imageView.setLayoutX(this.imageView.getLayoutX() + 1 > rightBound ?
+                        rightBound : this.imageView.getLayoutX() + 1);
+                this.imageView.setImage(RIGHT_IMAGE_VIEW);
             } else {
-                double leftBound = currentCanvas.getLayoutX();
-                imageView.setLayoutX(imageView.getLayoutX() - 1 < leftBound ?
-                        leftBound : imageView.getLayoutX() - 1);
-                imageView.setImage(LEFT_IMAGE_VIEW);
+                double leftBound = this.currentCanvas.getLayoutX();
+                this.imageView.setLayoutX(this.imageView.getLayoutX() - 1 < leftBound ?
+                        leftBound : this.imageView.getLayoutX() - 1);
+                this.imageView.setImage(LEFT_IMAGE_VIEW);
             }
         }
     }
@@ -101,14 +101,14 @@ public class SpriteImpl implements Sprite {
         boolean down = y > 0 ? true : false;
         for (int i = 0; i < Math.abs(y); i++) {
             if (down) {
-                double downBound = currentCanvas.getLayoutY() + currentCanvas.getHeight() -
-                        (imageView.getY() + imageView.getFitHeight());
-                imageView.setLayoutY(imageView.getLayoutY() + 1 > downBound ?
-                        downBound : imageView.getLayoutY() + 1);
+                double downBound = this.currentCanvas.getLayoutY() + this.currentCanvas.getHeight() -
+                        (this.imageView.getY() + this.imageView.getFitHeight());
+                this.imageView.setLayoutY(this.imageView.getLayoutY() + 1 > downBound ?
+                        downBound : this.imageView.getLayoutY() + 1);
             } else {
-                double upBound = currentCanvas.getLayoutY();
-                imageView.setLayoutY(imageView.getLayoutY() - 1 < upBound ?
-                        upBound : imageView.getLayoutY() - 1);
+                double upBound = this.currentCanvas.getLayoutY();
+                this.imageView.setLayoutY(this.imageView.getLayoutY() - 1 < upBound ?
+                        upBound : this.imageView.getLayoutY() - 1);
             }
         }
     }

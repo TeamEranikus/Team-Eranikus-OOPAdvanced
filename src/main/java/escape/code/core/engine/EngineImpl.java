@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Keeps the logic for the running level scene
@@ -32,14 +33,14 @@ import java.util.HashMap;
  */
 public class EngineImpl implements Engine {
 
+    private static final String STOP_TIMER = "stop";
+    private static final String CANVAS_ID = "mainCanvas";
+    private static final String END_GAME_RECTANGLE_ID = "exit";
+    private static final String END_LEVEL_RECTANGLE_ID = "door";
+    private static final String IMAGE_PLAYER_ID = "imagePlayer";
     private static final int PUZZLE_INCREMENTER = 1;
     private static final int DEFAULT_SPRITE_X_POSITION = 480;
     private static final int DEFAULT_SPRITE_Y_POSITION = 300;
-    private static final String END_LEVEL_RECTANGLE_ID = "door";
-    private static final String END_GAME_RECTANGLE_ID = "exit";
-    private static final String STOP_TIMER = "STOP";
-    private static final String IMAGE_PLAYER_ID = "imagePlayer";
-    private static final String CANVAS_ID = "mainCanvas";
 
     @Inject
     private static PuzzleRectangleService puzzleRectangleService;
@@ -109,12 +110,14 @@ public class EngineImpl implements Engine {
         this.sprite = new SpriteImpl(playerImage, canvas);
         this.currentPuzzleRectangle = this.getCurrentPuzzleRectangle();
         this.loadRectanglesCollision();
+        this.updateItems();
         scene.setOnKeyPressed(event -> this.keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> this.keys.put(event.getCode(), false));
     }
 
     private void setCurrentPuzzle() throws IllegalStateException {
         String currentPuzzleRectangleId = this.currentPuzzleRectangle.getId();
+        this.keys.clear();
         if (!currentPuzzleRectangleId.contains(END_LEVEL_RECTANGLE_ID)
                 && !currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)) {
             if (this.hasToSetPuzzle) {
@@ -124,16 +127,15 @@ public class EngineImpl implements Engine {
             }
             stageManager.loadSceneToPrimaryStage(new Stage(), Constants.PUZZLE_FXML_PATH);
         } else if (currentPuzzleRectangleId.contains(END_GAME_RECTANGLE_ID)) {
-            this.userService.updateUser(user);
+            this.userService.updateUser(this.user);
             stageManager.loadSceneToPrimaryStage(this.currentLoadedStage, Constants.GAME_FINISHED_FXML_PATH);
         } else {
             this.currentLoadedStage.close();
-            PuzzleRectangle puzzle = user.getPuzzleRectangle();
+            PuzzleRectangle puzzle = this.user.getPuzzleRectangle();
             long puzzleId = puzzle.getId();
             this.user.setPuzzleRectangle(puzzleRectangleService.getOneById(puzzleId + PUZZLE_INCREMENTER));
             throw new IllegalStateException(STOP_TIMER);
         }
-        keys.clear();
     }
 
 
@@ -150,7 +152,7 @@ public class EngineImpl implements Engine {
      * @return collision rectangle for the current puzzle
      */
     private Rectangle getCurrentPuzzleRectangle() {
-        PuzzleRectangle puzzleRectangle = user.getPuzzleRectangle();
+        PuzzleRectangle puzzleRectangle = this.user.getPuzzleRectangle();
         Rectangle current = (Rectangle) this.objectsInCurrentScene.get(puzzleRectangle.getName());
         current.setVisible(false);
         return current;
@@ -161,5 +163,16 @@ public class EngineImpl implements Engine {
             Node node = (Node) this.objectsInCurrentScene.get(currentItem.name());
             node.setVisible(currentItem.hasItem());
         }
+    }
+
+    private void updateItems(){
+        List<PuzzleRectangle> allRectanglesForCurrentLevel =
+                puzzleRectangleService.getAllByLevel(this.user.getLevel());
+        allRectanglesForCurrentLevel.stream()
+                .filter(rectangle -> rectangle.getId() < this.user.getPuzzleRectangle().getId())
+                .forEach(rectangle -> {
+            Item item = rectangle.getPuzzle().getItem();
+            this.setItem(item);
+        });
     }
 }

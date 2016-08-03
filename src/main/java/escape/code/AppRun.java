@@ -1,13 +1,10 @@
 package escape.code;
 
 import com.google.inject.Guice;
-import com.google.inject.Injector;
 import escape.code.configurations.InjectionModule;
 import escape.code.core.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
 
 /**
  * Game entry class
@@ -57,7 +54,7 @@ public class AppRun extends Application {
 //        };
 //        PuzzleRectangleService puzzleRectangleService = injector.getInstance(PuzzleRectangleService.class);
 //        Arrays.stream(taskParamsRect).forEach(puzzleRectangleService::createPuzzleRectangle);
-        Injector injector = Guice.createInjector(new InjectionModule());
+        Guice.createInjector(new InjectionModule());
         Game.initialize(primaryStage);
 
     }

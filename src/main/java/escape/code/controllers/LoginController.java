@@ -27,8 +27,6 @@ public class LoginController {
     @Inject
     private static UserService userService;
 
-    private User user;
-
     /**
      * Logged in the current user by given username and password
      * @param actionEvent
@@ -38,8 +36,8 @@ public class LoginController {
         String password = this.passwordField.getText();
         try {
             this.checkForEmptyString(username, password);
-            this.user = userService.getUser(username, password);
-            Game.setUser(this.user);
+            User user = userService.getUser(username, password);
+            Game.setUser(user);
             Game.loadMainMenu();
         } catch (IllegalArgumentException exception) {
             this.messageLabel.setText(exception.getMessage());

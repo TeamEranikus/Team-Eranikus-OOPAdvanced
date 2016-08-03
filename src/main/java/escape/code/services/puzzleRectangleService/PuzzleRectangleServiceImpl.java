@@ -6,6 +6,8 @@ import escape.code.models.Puzzle;
 import escape.code.models.PuzzleRectangle;
 import escape.code.services.puzzleService.PuzzleService;
 
+import java.util.List;
+
 /**
  * Keeps logic for puzzle rectangle database and puzzle rectangle DAO communication
  */
@@ -36,6 +38,11 @@ public class PuzzleRectangleServiceImpl implements PuzzleRectangleService {
     @Override
     public PuzzleRectangle getFirst() {
         return this.puzzleRectangleDao.getFirst();
+    }
+
+    @Override
+    public List<PuzzleRectangle> getAllByLevel(int level) {
+        return this.puzzleRectangleDao.getAllPuzzleRectangleByLevel(level);
     }
 
     @Override

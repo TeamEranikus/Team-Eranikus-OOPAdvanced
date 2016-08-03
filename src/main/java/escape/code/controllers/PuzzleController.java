@@ -17,27 +17,28 @@ import java.util.ResourceBundle;
  * Controls fxml file for current puzzle
  */
 public class PuzzleController implements Initializable {
+    private static final double IMAGE_RESIZE_COEFFICIENT = 2D;
 
     @FXML
-    Button hintButton;
+    private Button hintButton;
 
     @FXML
-    Label hintText;
+    private Label hintText;
 
     @FXML
-    Label description;
+    private Label description;
 
     @FXML
-    Label nextClue;
+    private Label nextClue;
 
     @FXML
-    ImageView puzzleImage;
+    private ImageView puzzleImage;
 
     @FXML
-    TextField userAnswer;
+    private TextField userAnswer;
 
     @FXML
-    Button answerButton;
+    private Button answerButton;
 
     private static Puzzle puzzle;
 
@@ -56,7 +57,7 @@ public class PuzzleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.puzzleImage.setImage(new Image(puzzle.getImagePath()));
-        centerImage();
+        this.centerImage();
         this.hintText.setText(puzzle.getHint());
         this.description.setText(puzzle.getQuestion());
         this.nextClue.setText("Incorrect answer!");
@@ -68,7 +69,7 @@ public class PuzzleController implements Initializable {
      * @param actionEvent
      */
     public void giveHint(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == hintButton) {
+        if (actionEvent.getSource() == this.hintButton) {
             this.hintText.setVisible(true);
         }
     }
@@ -94,16 +95,16 @@ public class PuzzleController implements Initializable {
      * Centers current puzzle image
      */
     private void centerImage() {
-        Image image = puzzleImage.getImage();
+        Image image = this.puzzleImage.getImage();
 
         if (image != null) {
-            double width = 0;
-            double height = 0;
+            double width = 0D;
+            double height = 0D;
 
-            double ratioX = puzzleImage.getFitWidth() / image.getWidth();
-            double ratioY = puzzleImage.getFitHeight() / image.getHeight();
+            double ratioX = this.puzzleImage.getFitWidth() / image.getWidth();
+            double ratioY = this.puzzleImage.getFitHeight() / image.getHeight();
 
-            double reduceCoeff = 0;
+            double reduceCoeff = 0D;
             if (ratioX >= ratioY) {
                 reduceCoeff = ratioY;
             } else {
@@ -113,8 +114,8 @@ public class PuzzleController implements Initializable {
             width = image.getWidth() * reduceCoeff;
             height = image.getHeight() * reduceCoeff;
 
-            puzzleImage.setX((puzzleImage.getFitWidth() - width) / 2);
-            puzzleImage.setY((puzzleImage.getFitHeight() - height) / 2);
+            this.puzzleImage.setX((this.puzzleImage.getFitWidth() - width) / IMAGE_RESIZE_COEFFICIENT);
+            this.puzzleImage.setY((this.puzzleImage.getFitHeight() - height) / IMAGE_RESIZE_COEFFICIENT);
 
         }
     }

@@ -21,6 +21,7 @@ import java.io.File;
 public class Game {
     private static final int LEVEL_INCREMENTER = 1;
     private static final int NUMBER_OF_LEVELS = Level.values().length;
+
     @Inject
     private static StageManager stageManager;
 

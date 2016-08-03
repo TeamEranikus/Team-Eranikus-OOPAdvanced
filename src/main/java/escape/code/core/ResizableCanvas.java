@@ -12,18 +12,18 @@ public class ResizableCanvas extends Canvas {
      * Adds width and height property event listeners
      */
     public ResizableCanvas() {
-        widthProperty().addListener(evt -> draw());
-        heightProperty().addListener(evt -> draw());
+        this.widthProperty().addListener(evt -> draw());
+        this.heightProperty().addListener(evt -> draw());
     }
 
     /**
      * Redraw the canvas when width or height property get changed
      */
     private void draw() {
-        double width = getWidth();
-        double height = getHeight();
-        GraphicsContext gc = getGraphicsContext2D();
-        gc.clearRect(0, 0, width, height);
+        double width = this.getWidth();
+        double height = this.getHeight();
+        GraphicsContext graphicsContext = getGraphicsContext2D();
+        graphicsContext.clearRect(0, 0, width, height);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ResizableCanvas extends Canvas {
      */
     @Override
     public double prefWidth(double height) {
-        return getWidth();
+        return this.getWidth();
     }
 
     /**
@@ -50,7 +50,7 @@ public class ResizableCanvas extends Canvas {
      */
     @Override
     public double prefHeight(double width) {
-        return getHeight();
+        return this.getHeight();
     }
 }
 
